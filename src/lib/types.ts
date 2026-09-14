@@ -7,6 +7,10 @@ export interface FoodItem {
   caloriesPer100g: number;  // Lượng calo trung bình trên 100g món này
   totalCalories: number;    // Tổng calo của phần ăn: (weightGrams * caloriesPer100g) / 100
   confidence: "low" | "medium" | "high"; // Độ tin cậy nhận diện của AI
+  proteinGrams?: number;    // Lượng đạm ước tính (g)
+  carbsGrams?: number;      // Lượng tinh bột ước tính (g)
+  fatGrams?: number;        // Lượng chất béo ước tính (g)
+  portionReasoning?: string;// Căn cứ trực quan ước lượng (ví dụ: 'Dựa vào đĩa 15cm, ước lượng cơm ~120g')
 }
 
 /**
@@ -15,6 +19,10 @@ export interface FoodItem {
 export interface FoodAnalysisResult {
   items: FoodItem[];        // Danh sách các món ăn nhận diện được
   totalMealCalories: number;// Tổng calo của toàn bộ bữa ăn
+  totalProtein?: number;    // Tổng đạm toàn bữa ăn (g)
+  totalCarbs?: number;      // Tổng tinh bột toàn bữa ăn (g)
+  totalFat?: number;        // Tổng chất béo toàn bữa ăn (g)
+  appliedContextNote?: string; // Xác nhận cách AI đã áp dụng ghi chú/kích thước/khẩu phần của người dùng
   note?: string;            // Ghi chú thêm (hoặc lý do nếu ảnh không phải đồ ăn)
 }
 
