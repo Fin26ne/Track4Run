@@ -90,9 +90,17 @@ export default function GoalsPage() {
       </div>
 
       {loading ? (
-        <div className="p-16 text-center text-sm text-neutral-400 bg-[#101522] border border-[#1e2638] rounded-3xl">
-          <Sparkles className="w-8 h-8 animate-spin mx-auto mb-3 text-orange-500" />
-          <p className="font-bold text-white">Đang tải dữ liệu mục tiêu...</p>
+        <div className="p-16 text-center text-sm text-neutral-400 bg-[#101522] border border-[#1e2638] rounded-3xl space-y-4">
+          <div className="flex items-center justify-center gap-1.5 h-8">
+            <span className="w-1.5 bg-orange-500 rounded-full animate-wave-1" />
+            <span className="w-1.5 bg-amber-400 rounded-full animate-wave-2" />
+            <span className="w-1.5 bg-emerald-400 rounded-full animate-wave-3" />
+            <span className="w-1.5 bg-orange-400 rounded-full animate-wave-4" />
+          </div>
+          <p className="font-bold text-white text-sm">Đang tải dữ liệu mục tiêu...</p>
+          <div className="w-40 h-1 bg-[#141b2b] rounded-full mx-auto overflow-hidden relative">
+            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-orange-500 to-transparent animate-shimmer-beam" />
+          </div>
         </div>
       ) : userId ? (
         <div className="space-y-6">

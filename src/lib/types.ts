@@ -111,3 +111,16 @@ export interface DaySummary {
   foodLogs: FoodLog[];       // Danh sách bữa ăn trong ngày
   runLogs: RunLog[];         // Danh sách buổi chạy trong ngày
 }
+
+/**
+ * Lời khuyên và nhận định cá nhân hóa từ AI Coach (chu kỳ 30 ngày & cả năm).
+ */
+export interface AICoachAdvice {
+  assessment: string;        // Nhận định thể trạng & phong độ
+  fatBurnEstimateKg: number; // Dự kiến kg mỡ thay đổi (âm là giảm, dương là tăng)
+  deficitStatus: "optimal" | "surplus" | "aggressive"; // Đánh giá mức độ an toàn
+  nutritionAdvice: string;   // Lời khuyên điều chỉnh dinh dưỡng
+  workoutAdvice: string;     // Kế hoạch chạy bộ tuần/tháng tiếp theo
+  longTermProjection: string;// Dự báo 1 năm nếu duy trì phong độ này
+}
+

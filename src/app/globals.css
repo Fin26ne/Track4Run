@@ -45,3 +45,47 @@ input[type="number"] {
 .animate-fadeIn {
   animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Athletic Waveform Equalizer (thay thế vòng xoay AI slop thông thường) */
+@keyframes waveBar1 {
+  0%, 100% { height: 8px; }
+  50% { height: 28px; }
+}
+
+@keyframes waveBar2 {
+  0%, 100% { height: 22px; }
+  50% { height: 10px; }
+}
+
+@keyframes waveBar3 {
+  0%, 100% { height: 14px; }
+  50% { height: 32px; }
+}
+
+@keyframes waveBar4 {
+  0%, 100% { height: 28px; }
+  50% { height: 12px; }
+}
+
+.animate-wave-1 {
+  animation: waveBar1 1s ease-in-out infinite;
+}
+.animate-wave-2 {
+  animation: waveBar2 1.1s ease-in-out infinite;
+}
+.animate-wave-3 {
+  animation: waveBar3 0.9s ease-in-out infinite;
+}
+.animate-wave-4 {
+  animation: waveBar4 1.2s ease-in-out infinite;
+}
+
+/* Linear Shimmer Laser Beam Scanner */
+@keyframes shimmerBeam {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer-beam {
+  animation: shimmerBeam 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

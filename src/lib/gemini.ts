@@ -73,3 +73,62 @@ export async function analyzeImageWithGemini({
 
   throw lastError instanceof Error ? lastError : new Error("Không nhận được nội dung phản hồi từ Gemini API.");
 }
+
+interface GenerateTextOptions {
+  prompt: string;
+  responseSchema?: Schema;
+}
+
+/**
+ * Helper gọi Gemini Flash để sinh nội dung văn bản (phân tích AI Coach, lập kế hoạch).
+ * Tự động fallback giữa gemini-2.5-flash và gemini-3.6-flash.
+ * CHỈ SỬ DỤNG TRONG SERVER-SIDE ROUTE HANDLERS.
+ */
+export async function generateTextWithGemini({
+  prompt,
+  responseSchema,
+}: GenerateTextOptions): Promise<string> {
+  const apiKey = process.env.GEMINI_API_KEY;
+
+  if (!apiKey || apiKey === "your_gemini_api_key_here") {
+    throw new Error(
+      "Chưa cấu hình GEMINI_API_KEY trên server. Vui lòng thiết lập biến môi trường GEMINI_API_KEY trong file .env.local"
+    );
+  }
+
+  const ai = new GoogleGenAI({ apiKey });
+  const modelsToTry = ["gemini-2.5-flash", "gemini-3.6-flash"];
+  let lastError: unknown;
+
+  for (const model of modelsToTry) {
+    try {
+      const response = await ai.models.generateContent({
+        model,
+        contents: [{ text: prompt }],
+        config: {
+          responseMimeType: "application/json",
+          ...(responseSchema ? { responseSchema } : {}),
+        },
+      });
+
+      const text = response.text;
+      if (text) {
+        return text;
+      }
+    } catch (err: unknown) {
+      lastError = err;
+      const errMsg = err instanceof Error ? err.message : String(err);
+      if (
+        errMsg.includes("404") ||
+        errMsg.includes("no longer available") ||
+        errMsg.includes("NOT_FOUND")
+      ) {
+        console.warn(`Model ${model} báo 404, chuyển sang model ${modelsToTry[1]}...`);
+        continue;
+      }
+      throw err;
+    }
+  }
+
+  throw lastError instanceof Error ? lastError : new Error("Không nhận được nội dung phản hồi từ Gemini API.");
+}

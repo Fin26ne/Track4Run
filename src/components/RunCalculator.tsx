@@ -797,18 +797,34 @@ export default function RunCalculator() {
             />
           </div>
 
-          {/* Loading state */}
+          {/* Loading state: Athletic Pace Sensor Waveform Scanner */}
           {photoLoading && (
-            <div className="bg-[#101522] border border-neutral-800/90 rounded-3xl p-8 text-center space-y-3">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-orange-500/20 text-orange-400 animate-pulse">
-                <Sparkles className="w-6 h-6 animate-spin" />
+            <div className="bg-[#101522] border border-[#1e2638] rounded-3xl p-8 text-center space-y-5">
+              {/* Athletic Waveform Scanner */}
+              <div className="flex items-center justify-center gap-1.5 h-10">
+                <span className="w-1.5 bg-orange-500 rounded-full animate-wave-1" />
+                <span className="w-1.5 bg-amber-400 rounded-full animate-wave-2" />
+                <span className="w-1.5 bg-orange-400 rounded-full animate-wave-3" />
+                <span className="w-1.5 bg-amber-500 rounded-full animate-wave-4" />
               </div>
-              <p className="font-bold text-white text-sm sm:text-base">
-                Gemini đang trích xuất số liệu từ ảnh đồng hồ...
-              </p>
-              <p className="text-xs text-neutral-400 max-w-sm mx-auto">
-                Tự động nhận diện km, thời gian, quy đổi Pace chuẩn xác.
-              </p>
+
+              <div className="space-y-1.5">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-black">
+                  <span className="w-2 h-2 rounded-full bg-orange-500 animate-ping" />
+                  <span>GEMINI OCR SENSOR SCANNING</span>
+                </div>
+                <p className="font-black text-white text-base pt-1">
+                  Đang trích xuất số liệu từ ảnh đồng hồ...
+                </p>
+                <p className="text-xs text-neutral-400 max-w-sm mx-auto">
+                  Tự động nhận diện km, thời gian và tính toán Pace chuẩn sinh lý học thể thao.
+                </p>
+              </div>
+
+              {/* Shimmer laser beam scanner */}
+              <div className="w-48 h-1 bg-[#141b2b] rounded-full mx-auto overflow-hidden relative">
+                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-orange-500 to-transparent animate-shimmer-beam" />
+              </div>
             </div>
           )}
 

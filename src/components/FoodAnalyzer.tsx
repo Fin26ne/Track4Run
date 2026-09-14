@@ -136,19 +136,33 @@ export default function FoodAnalyzer() {
         />
       </div>
 
-      {/* Loading state */}
+      {/* Loading state: Athletic Biometric Vision Scanner */}
       {loading && (
-        <div className="bg-[#101522] border border-[#1e2638] rounded-3xl p-8 text-center space-y-4">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#141b2b] text-emerald-400 border border-[#1e2638] animate-pulse">
-            <Sparkles className="w-7 h-7 animate-spin" />
+        <div className="bg-[#101522] border border-[#1e2638] rounded-3xl p-8 text-center space-y-5">
+          {/* Athletic Waveform Scanner */}
+          <div className="flex items-center justify-center gap-1.5 h-10">
+            <span className="w-1.5 bg-emerald-500 rounded-full animate-wave-1" />
+            <span className="w-1.5 bg-teal-400 rounded-full animate-wave-2" />
+            <span className="w-1.5 bg-emerald-400 rounded-full animate-wave-3" />
+            <span className="w-1.5 bg-teal-500 rounded-full animate-wave-4" />
           </div>
-          <div className="space-y-1">
-            <p className="font-black text-white text-base">
-              Gemini đang phân tích món ăn & định lượng calo...
+
+          <div className="space-y-1.5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-black">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+              <span>GEMINI VISION SCANNING</span>
+            </div>
+            <p className="font-black text-white text-base pt-1">
+              Đang phân tích món ăn & định lượng calo...
             </p>
             <p className="text-xs text-neutral-400 max-w-sm mx-auto">
-              Đang nhận diện từng thành phần thực phẩm, ước lượng khối lượng (gram) và tính toán tổng năng lượng.
+              Đang nhận diện từng thành phần thực phẩm, ước lượng thể tích khối lượng và tính toán năng lượng.
             </p>
+          </div>
+
+          {/* Shimmer laser beam scanner */}
+          <div className="w-48 h-1 bg-[#141b2b] rounded-full mx-auto overflow-hidden relative">
+            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-emerald-400 to-transparent animate-shimmer-beam" />
           </div>
         </div>
       )}

@@ -3,9 +3,10 @@
 import React, { useState, useEffect } from "react";
 import CalendarMonth from "@/components/CalendarMonth";
 import DayDetailSheet from "@/components/DayDetailSheet";
+import AICoachCard from "@/components/AICoachCard";
 import { createClient } from "@/lib/supabase/client";
 import { DaySummary, FoodLog, Goal, RunLog } from "@/lib/types";
-import { buildDaySummaries } from "@/lib/streak";
+import { buildDaySummaries, calculateStreak } from "@/lib/streak";
 import { Calendar as CalendarIcon, TrendingUp, Navigation, Flame, Sparkles } from "lucide-react";
 
 export default function HistoryPage() {
@@ -15,6 +16,8 @@ export default function HistoryPage() {
   const [runLogs, setRunLogs] = useState<RunLog[]>([]);
   const [goals, setGoals] = useState<Goal[]>([]);
   const [daySummaries, setDaySummaries] = useState<DaySummary[]>([]);
+  const [weightKg, setWeightKg] = useState<number>(60);
+  const [streak, setStreak] = useState<number>(0);
 
   const [selectedDay, setSelectedDay] = useState<{
     summary: DaySummary | null;
@@ -31,8 +34,8 @@ export default function HistoryPage() {
 
         if (!user) return;
 
-        // Tải food_logs, run_logs, goals của user
-        const [foodRes, runRes, goalsRes] = await Promise.all([
+        // Tải food_logs, run_logs, goals, profile của user
+        const [foodRes, runRes, goalsRes, profileRes] = await Promise.all([
           supabase
             .from("food_logs")
             .select("*")
@@ -44,19 +47,24 @@ export default function HistoryPage() {
             .eq("user_id", user.id)
             .order("log_date", { ascending: false }),
           supabase.from("goals").select("*").eq("user_id", user.id),
+          supabase.from("profiles").select("*").eq("id", user.id).single(),
         ]);
 
         const fLogs = (foodRes.data as FoodLog[]) || [];
         const rLogs = (runRes.data as RunLog[]) || [];
         const gList = (goalsRes.data as Goal[]) || [];
+        if (profileRes.data) {
+          setWeightKg(Number(profileRes.data.weight_kg || 60));
+        }
 
         setFoodLogs(fLogs);
         setRunLogs(rLogs);
         setGoals(gList);
 
-        // Xây dựng mảng DaySummary cho 90 ngày gần nhất
-        const summaries = buildDaySummaries(fLogs, rLogs, gList, 90);
+        // Xây dựng mảng DaySummary cho 365 ngày (cả năm liên tục)
+        const summaries = buildDaySummaries(fLogs, rLogs, gList, 365);
         setDaySummaries(summaries);
+        setStreak(calculateStreak(summaries));
       } catch (err) {
         console.error("Lỗi tải lịch sử:", err);
       } finally {
@@ -98,23 +106,38 @@ export default function HistoryPage() {
         <div>
           <div className="flex items-center gap-2">
             <span className="text-[11px] font-extrabold uppercase tracking-widest text-orange-500">
-              Analytics & History
+              Analytics & History (365 Days)
             </span>
             <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
           </div>
           <h1 className="text-2xl font-black tracking-tight text-white">
-            Lịch sử & Thống kê
+            Lịch sử & Cố vấn Thể thao
           </h1>
         </div>
       </div>
 
       {loading ? (
-        <div className="p-16 text-center text-sm text-neutral-400 bg-[#101522] border border-[#1e2638] rounded-3xl">
-          <Sparkles className="w-8 h-8 animate-spin mx-auto mb-3 text-orange-500" />
-          <p className="font-bold text-white">Đang tải dữ liệu đám mây...</p>
+        <div className="p-12 text-center text-sm text-neutral-400 bg-[#101522] border border-[#1e2638] rounded-3xl space-y-4">
+          <div className="flex items-center justify-center gap-1.5 h-8">
+            <span className="w-1.5 bg-orange-500 rounded-full animate-wave-1" />
+            <span className="w-1.5 bg-amber-400 rounded-full animate-wave-2" />
+            <span className="w-1.5 bg-emerald-400 rounded-full animate-wave-3" />
+            <span className="w-1.5 bg-orange-400 rounded-full animate-wave-4" />
+          </div>
+          <p className="font-bold text-white text-sm">Đang đồng bộ dữ liệu đám mây cả năm...</p>
+          <div className="w-40 h-1 bg-[#141b2b] rounded-full mx-auto overflow-hidden relative">
+            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-orange-500 to-transparent animate-shimmer-beam" />
+          </div>
         </div>
       ) : (
         <>
+          {/* Cố vấn AI Coach & Dinh dưỡng thể thao 30 ngày & Cả năm */}
+          <AICoachCard
+            daySummaries={daySummaries}
+            weightKg={weightKg}
+            streak={streak}
+          />
+
           {/* Card thống kê tổng hợp tuần / tháng */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Thống kê tuần */}
