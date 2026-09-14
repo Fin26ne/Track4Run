@@ -97,27 +97,27 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6 pb-8 animate-fadeIn">
       {/* Top Header & User Action */}
-      <div className="flex items-center justify-between pt-1">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-orange-500/20 to-amber-500/20 border border-orange-500/30 flex items-center justify-center text-orange-400 font-bold shadow-inner">
-            <User className="w-5 h-5" />
+      <div className="flex items-center justify-between pt-1 gap-2">
+        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-gradient-to-br from-orange-500/20 to-amber-500/20 border border-orange-500/30 flex items-center justify-center text-orange-400 font-bold shadow-inner shrink-0">
+            <User className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
-          <div className="leading-tight">
-            <span className="text-[11px] font-semibold text-neutral-400 block uppercase tracking-wider">
+          <div className="leading-tight min-w-0">
+            <span className="text-[10px] sm:text-[11px] font-semibold text-neutral-400 block uppercase tracking-wider truncate">
               Vận động viên
             </span>
-            <span className="text-sm font-black text-white truncate max-w-[160px] sm:max-w-[260px] block">
+            <span className="text-xs sm:text-sm font-black text-white truncate max-w-[120px] sm:max-w-[260px] block">
               {userEmail}
             </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
           <StreakBadge streak={streak} />
           <button
             type="button"
             onClick={handleLogout}
-            className="p-2 rounded-2xl bg-[#141b2b] border border-neutral-800 hover:border-red-500/40 text-neutral-400 hover:text-red-400 transition cursor-pointer shadow-sm"
+            className="p-2 rounded-xl sm:rounded-2xl bg-[#141b2b] border border-neutral-800 hover:border-red-500/40 text-neutral-400 hover:text-red-400 transition cursor-pointer shadow-sm shrink-0"
             title="Đăng xuất"
           >
             <LogOut className="w-4 h-4" />
