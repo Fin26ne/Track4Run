@@ -141,63 +141,63 @@ export default function DashboardPage() {
       ) : (
         <>
           {/* Card Tổng Calo Hôm nay: Hero Activity Card */}
-          <div className="bg-[#101522] border border-neutral-800 text-white rounded-3xl p-6 sm:p-7 shadow-2xl relative overflow-hidden space-y-6">
+          <div className="bg-[#101522] border border-neutral-800 text-white rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-2xl relative overflow-hidden space-y-4 sm:space-y-6">
             <div className="absolute -top-12 -right-12 w-48 h-48 bg-orange-500/15 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="flex items-center justify-between relative z-10">
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-black uppercase tracking-wider text-orange-400">
-                    Net Calo Hôm Nay (Nạp - Tiêu)
+            <div className="flex items-center justify-between relative z-10 gap-2">
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                  <span className="text-[11px] sm:text-xs font-black uppercase tracking-wider text-orange-400">
+                    Net Calo Hôm Nay
                   </span>
                   <span
-                    className={`text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider ${
+                    className={`text-[9px] sm:text-[10px] font-black px-1.5 sm:px-2 py-0.5 rounded-full uppercase tracking-wider ${
                       netCalories <= 0
                         ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
                         : "bg-amber-500/20 text-amber-400 border border-amber-500/30"
                     }`}
                   >
-                    {netCalories <= 0 ? "Thâm hụt (Giảm mỡ)" : "Thặng dư calo"}
+                    {netCalories <= 0 ? "Thâm hụt" : "Thặng dư"}
                   </span>
                 </div>
 
-                <div className="flex items-baseline gap-2 mt-2">
-                  <span className="text-5xl sm:text-6xl font-black tracking-tight text-white font-mono">
+                <div className="flex items-baseline gap-1.5 sm:gap-2 mt-1 sm:mt-2">
+                  <span className="text-4xl sm:text-6xl font-black tracking-tight text-white font-mono">
                     {netCalories > 0 ? `+${netCalories.toLocaleString()}` : netCalories.toLocaleString()}
                   </span>
-                  <span className="text-xl font-black text-neutral-400">
+                  <span className="text-base sm:text-xl font-black text-neutral-400">
                     kcal
                   </span>
                 </div>
               </div>
 
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500/20 to-amber-500/20 border border-orange-500/30 text-orange-400 flex items-center justify-center shadow-inner">
-                <Flame className="w-9 h-9 fill-orange-500 text-orange-500" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-orange-500/20 to-amber-500/20 border border-orange-500/30 text-orange-400 flex items-center justify-center shadow-inner shrink-0">
+                <Flame className="w-6 h-6 sm:w-9 sm:h-9 fill-orange-500 text-orange-500" />
               </div>
             </div>
 
             {/* Phân rã Nạp vs Tiêu */}
-            <div className="grid grid-cols-2 gap-3 pt-4 border-t border-neutral-800/80 relative z-10">
-              <div className="p-3.5 rounded-2xl bg-[#141b2b] border border-neutral-800">
-                <span className="text-xs text-neutral-400 block font-medium flex items-center gap-1.5">
-                  <Utensils className="w-3.5 h-3.5 text-emerald-400" />
-                  Tổng nạp vào:
+            <div className="grid grid-cols-2 gap-2 sm:gap-3 pt-3 sm:pt-4 border-t border-neutral-800/80 relative z-10">
+              <div className="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl bg-[#141b2b] border border-neutral-800">
+                <span className="text-[11px] sm:text-xs text-neutral-400 block font-medium flex items-center gap-1.5 truncate">
+                  <Utensils className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  Nạp vào:
                 </span>
-                <span className="text-xl font-black text-white font-mono mt-1 block">
+                <span className="text-lg sm:text-xl font-black text-white font-mono mt-0.5 sm:mt-1 block">
                   {totalIntake.toLocaleString()}{" "}
-                  <span className="text-xs font-bold text-neutral-400 font-sans">kcal</span>
+                  <span className="text-[10px] sm:text-xs font-bold text-neutral-400 font-sans">kcal</span>
                 </span>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-[#141b2b] border border-neutral-800">
-                <span className="text-xs text-neutral-400 block font-medium flex items-center gap-1.5">
-                  <Flame className="w-3.5 h-3.5 text-orange-400" />
-                  Tiêu thụ (Run):
+              <div className="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl bg-[#141b2b] border border-neutral-800">
+                <span className="text-[11px] sm:text-xs text-neutral-400 block font-medium flex items-center gap-1.5 truncate">
+                  <Flame className="w-3.5 h-3.5 text-orange-400 shrink-0" />
+                  Chạy bộ:
                 </span>
-                <span className="text-xl font-black text-white font-mono mt-1 block">
+                <span className="text-lg sm:text-xl font-black text-white font-mono mt-0.5 sm:mt-1 block">
                   {totalBurn.toLocaleString()}{" "}
-                  <span className="text-xs font-bold text-neutral-400 font-sans">kcal</span>
+                  <span className="text-[10px] sm:text-xs font-bold text-neutral-400 font-sans">kcal</span>
                 </span>
               </div>
             </div>
@@ -205,14 +205,14 @@ export default function DashboardPage() {
 
           {/* Tiến độ Mục tiêu ngày nếu có cài đặt */}
           {(activeIntakeGoal || activeBurnGoal) && (
-            <div className="bg-[#101522] border border-neutral-800/90 rounded-3xl p-5 sm:p-6 shadow-xl space-y-4">
-              <h3 className="text-xs font-black uppercase tracking-wider text-neutral-400 flex items-center gap-2">
+            <div className="bg-[#101522] border border-neutral-800/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xl space-y-3 sm:space-y-4">
+              <h3 className="text-[11px] sm:text-xs font-black uppercase tracking-wider text-neutral-400 flex items-center gap-2">
                 <Target className="w-4 h-4 text-orange-500" />
                 Tiến độ mục tiêu ngày
               </h3>
 
               {activeIntakeGoal && (
-                <div className="space-y-2 p-3.5 rounded-2xl bg-[#141b2b] border border-neutral-800">
+                <div className="space-y-1.5 sm:space-y-2 p-3 sm:p-3.5 rounded-xl sm:rounded-2xl bg-[#141b2b] border border-neutral-800">
                   <div className="flex items-center justify-between text-xs">
                     <span className="font-bold text-neutral-300">
                       Trần calo nạp (Tối đa)
@@ -221,7 +221,7 @@ export default function DashboardPage() {
                       {totalIntake} / {activeIntakeGoal.target_value} kcal
                     </span>
                   </div>
-                  <div className="w-full h-3 rounded-full bg-neutral-900 border border-neutral-800 overflow-hidden">
+                  <div className="w-full h-2.5 sm:h-3 rounded-full bg-neutral-900 border border-neutral-800 overflow-hidden">
                     <div
                       className={`h-full rounded-full transition-all duration-500 ${
                         totalIntake <= Number(activeIntakeGoal.target_value)
@@ -240,7 +240,7 @@ export default function DashboardPage() {
               )}
 
               {activeBurnGoal && (
-                <div className="space-y-2 p-3.5 rounded-2xl bg-[#141b2b] border border-neutral-800">
+                <div className="space-y-1.5 sm:space-y-2 p-3 sm:p-3.5 rounded-xl sm:rounded-2xl bg-[#141b2b] border border-neutral-800">
                   <div className="flex items-center justify-between text-xs">
                     <span className="font-bold text-neutral-300">
                       Sàn calo đốt chạy bộ (Tối thiểu)
@@ -249,7 +249,7 @@ export default function DashboardPage() {
                       {totalBurn} / {activeBurnGoal.target_value} kcal
                     </span>
                   </div>
-                  <div className="w-full h-3 rounded-full bg-neutral-900 border border-neutral-800 overflow-hidden">
+                  <div className="w-full h-2.5 sm:h-3 rounded-full bg-neutral-900 border border-neutral-800 overflow-hidden">
                     <div
                       className="h-full bg-gradient-to-r from-orange-500 to-amber-400 rounded-full transition-all duration-500"
                       style={{
@@ -266,19 +266,19 @@ export default function DashboardPage() {
           )}
 
           {/* 2 Nút lớn hành động nhanh: Modern Athletic Action Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <Link
               href="/log/food"
-              className="p-5 sm:p-6 rounded-3xl bg-[#101522] border border-neutral-800 hover:border-emerald-500/50 shadow-xl transition-all flex items-center gap-4 group cursor-pointer"
+              className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#101522] border border-neutral-800 hover:border-emerald-500/50 shadow-xl transition-all flex items-center gap-3.5 sm:gap-4 group cursor-pointer"
             >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition shadow-inner">
-                <Utensils className="w-7 h-7" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition shadow-inner">
+                <Utensils className="w-6 h-6 sm:w-7 sm:h-7" />
               </div>
-              <div>
-                <span className="font-black text-base text-white block group-hover:text-emerald-400 transition">
+              <div className="min-w-0">
+                <span className="font-black text-sm sm:text-base text-white block group-hover:text-emerald-400 transition truncate">
                   Chụp ảnh món ăn
                 </span>
-                <span className="text-xs text-neutral-400 mt-0.5 block">
+                <span className="text-[11px] sm:text-xs text-neutral-400 mt-0.5 block truncate">
                   AI ước lượng gram & calo tức thì
                 </span>
               </div>
@@ -286,17 +286,17 @@ export default function DashboardPage() {
 
             <Link
               href="/log/run"
-              className="p-5 sm:p-6 rounded-3xl bg-[#101522] border border-neutral-800 hover:border-orange-500/50 shadow-xl transition-all flex items-center gap-4 group cursor-pointer"
+              className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#101522] border border-neutral-800 hover:border-orange-500/50 shadow-xl transition-all flex items-center gap-3.5 sm:gap-4 group cursor-pointer"
             >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500/20 to-amber-500/20 border border-orange-500/30 text-orange-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition shadow-inner">
-                <Flame className="w-7 h-7 fill-orange-500 text-orange-500" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-orange-500/20 to-amber-500/20 border border-orange-500/30 text-orange-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition shadow-inner">
+                <Flame className="w-6 h-6 sm:w-7 sm:h-7 fill-orange-500 text-orange-500" />
               </div>
-              <div>
-                <span className="font-black text-base text-white block group-hover:text-orange-400 transition">
+              <div className="min-w-0">
+                <span className="font-black text-sm sm:text-base text-white block group-hover:text-orange-400 transition truncate">
                   Ghi nhận chạy bộ
                 </span>
-                <span className="text-xs text-neutral-400 mt-0.5 block">
-                  Chuẩn ACSM, nhập Pace & quét đồng hồ
+                <span className="text-[11px] sm:text-xs text-neutral-400 mt-0.5 block truncate">
+                  Chuẩn ACSM & quét đồng hồ
                 </span>
               </div>
             </Link>
@@ -305,43 +305,43 @@ export default function DashboardPage() {
           {/* Danh sách hoạt động hôm nay */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-xs font-black uppercase tracking-wider text-neutral-400">
+              <h3 className="text-[11px] sm:text-xs font-black uppercase tracking-wider text-neutral-400">
                 Hoạt động hôm nay
               </h3>
               <Link
                 href="/history"
-                className="text-xs font-bold text-orange-400 hover:text-orange-300 transition flex items-center gap-1"
+                className="text-[11px] sm:text-xs font-bold text-orange-400 hover:text-orange-300 transition flex items-center gap-1"
               >
-                <span>Xem lịch sử chi tiết</span>
+                <span>Xem chi tiết</span>
                 <span>→</span>
               </Link>
             </div>
 
             {(!todaySummary || (!todaySummary.foodLogs.length && !todaySummary.runLogs.length)) ? (
-              <div className="p-8 rounded-3xl bg-[#101522] border border-dashed border-neutral-800 text-center space-y-1.5">
-                <p className="text-sm font-bold text-neutral-300">
+              <div className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#101522] border border-dashed border-neutral-800 text-center space-y-1.5">
+                <p className="text-xs sm:text-sm font-bold text-neutral-300">
                   Hôm nay chưa có hoạt động nào được ghi nhận.
                 </p>
-                <p className="text-xs text-neutral-500">
+                <p className="text-[11px] sm:text-xs text-neutral-500">
                   Chụp ảnh bữa ăn hoặc ghi lại buổi chạy để duy trì chuỗi ngày rực lửa (Streak)!
                 </p>
               </div>
             ) : (
-              <div className="space-y-2.5">
+              <div className="space-y-2 sm:space-y-2.5">
                 {todaySummary.foodLogs.map((log) => (
                   <div
                     key={log.id}
-                    className="p-4 rounded-2xl bg-[#101522] border border-neutral-800 flex items-center justify-between gap-3 shadow-md"
+                    className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-[#101522] border border-neutral-800 flex items-center justify-between gap-2.5 sm:gap-3 shadow-md"
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
-                        <Utensils className="w-5 h-5" />
+                    <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
+                        <Utensils className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
-                      <div className="truncate">
-                        <span className="text-sm font-bold text-white block truncate">
+                      <div className="min-w-0 flex-1">
+                        <span className="text-xs sm:text-sm font-bold text-white block truncate">
                           {log.items.map((i) => i.name).join(", ") || "Bữa ăn"}
                         </span>
-                        <span className="text-[11px] text-neutral-500">
+                        <span className="text-[10px] sm:text-[11px] text-neutral-500 block">
                           {new Date(log.logged_at).toLocaleTimeString("vi-VN", {
                             hour: "2-digit",
                             minute: "2-digit",
@@ -349,7 +349,7 @@ export default function DashboardPage() {
                         </span>
                       </div>
                     </div>
-                    <span className="text-sm font-black text-emerald-400 font-mono shrink-0">
+                    <span className="text-xs sm:text-sm font-black text-emerald-400 font-mono shrink-0">
                       +{log.total_calories.toLocaleString()} kcal
                     </span>
                   </div>
@@ -358,22 +358,22 @@ export default function DashboardPage() {
                 {todaySummary.runLogs.map((log) => (
                   <div
                     key={log.id}
-                    className="p-4 rounded-2xl bg-[#101522] border border-neutral-800 flex items-center justify-between gap-3 shadow-md"
+                    className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-[#101522] border border-neutral-800 flex items-center justify-between gap-2.5 sm:gap-3 shadow-md"
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-orange-500/15 border border-orange-500/30 text-orange-400 flex items-center justify-center shrink-0">
-                        <Flame className="w-5 h-5 fill-orange-500 text-orange-500" />
+                    <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-orange-500/15 border border-orange-500/30 text-orange-400 flex items-center justify-center shrink-0">
+                        <Flame className="w-4 h-4 sm:w-5 sm:h-5 fill-orange-500 text-orange-500" />
                       </div>
-                      <div className="truncate">
-                        <span className="text-sm font-bold text-white block truncate">
+                      <div className="min-w-0 flex-1">
+                        <span className="text-xs sm:text-sm font-bold text-white block truncate">
                           Chạy {log.distance_km} km ({log.duration_minutes} phút)
                         </span>
-                        <span className="text-[11px] text-neutral-500">
+                        <span className="text-[10px] sm:text-[11px] text-neutral-500 block">
                           {log.source === "photo" ? "Quét ảnh đồng hồ" : "Nhập tay"}
                         </span>
                       </div>
                     </div>
-                    <span className="text-sm font-black text-orange-400 font-mono shrink-0">
+                    <span className="text-xs sm:text-sm font-black text-orange-400 font-mono shrink-0">
                       -{log.calories_burned.toLocaleString()} kcal
                     </span>
                   </div>

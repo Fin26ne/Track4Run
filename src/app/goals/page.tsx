@@ -105,22 +105,22 @@ export default function GoalsPage() {
       ) : userId ? (
         <div className="space-y-6">
           {/* Card cập nhật cân nặng cơ thể */}
-          <div className="bg-[#101522] border border-[#1e2638] rounded-3xl p-5 sm:p-6 shadow-xl space-y-4">
+          <div className="bg-[#101522] border border-[#1e2638] rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xl space-y-3 sm:space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-[#141b2b] border border-[#1e2638] text-orange-500 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-2xl bg-[#141b2b] border border-[#1e2638] text-orange-500 flex items-center justify-center shrink-0">
                 <Weight className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-black text-white">
+                <h3 className="text-sm sm:text-base font-black text-white">
                   Cân nặng cơ thể
                 </h3>
                 <p className="text-xs text-neutral-400">
-                  Dùng trong công thức sinh lý ACSM để tự động tính calo đốt chính xác
+                  Dùng trong công thức sinh lý ACSM để tính calo đốt chuẩn xác
                 </p>
               </div>
             </div>
 
-            <form onSubmit={handleUpdateWeight} className="flex flex-col sm:flex-row sm:items-center gap-3 pt-1">
+            <form onSubmit={handleUpdateWeight} className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 pt-1">
               <div className="relative flex-1">
                 <input
                   type="number"
@@ -130,9 +130,9 @@ export default function GoalsPage() {
                   required
                   value={weightKg}
                   onChange={(e) => setWeightKg(parseFloat(e.target.value) || 0)}
-                  className="w-full pl-4 pr-12 py-3 rounded-2xl border border-[#1e2638] bg-[#141b2b] text-base font-bold text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  className="w-full pl-3.5 sm:pl-4 pr-10 sm:pr-12 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl border border-[#1e2638] bg-[#141b2b] text-sm sm:text-base font-bold text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 />
-                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-neutral-400 uppercase">
+                <span className="absolute right-3.5 sm:right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-neutral-400 uppercase">
                   kg
                 </span>
               </div>
@@ -140,7 +140,7 @@ export default function GoalsPage() {
               <button
                 type="submit"
                 disabled={savingWeight}
-                className="px-6 py-3 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black text-xs transition-all shadow-md active:scale-[0.98] disabled:opacity-50"
+                className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black text-xs transition-all shadow-md active:scale-[0.98] disabled:opacity-50 cursor-pointer text-center"
               >
                 {savingWeight ? "Đang lưu..." : "Cập nhật cân nặng"}
               </button>

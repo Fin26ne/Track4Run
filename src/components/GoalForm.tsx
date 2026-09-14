@@ -131,23 +131,23 @@ export default function GoalForm({ initialGoals, userId }: GoalFormProps) {
           return (
             <div
               key={config.type}
-              className={`p-5 sm:p-6 rounded-3xl border transition-all ${
+              className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl border transition-all ${
                 state.is_active
                   ? "bg-[#101522] border-[#1e2638] shadow-xl"
                   : "bg-[#101522]/40 border-[#1e2638]/40 opacity-70"
               }`}
             >
-              <div className="flex items-start justify-between gap-4 mb-2">
-                <div className="space-y-1">
+              <div className="flex items-start justify-between gap-3 mb-2">
+                <div className="space-y-1 min-w-0">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-xl bg-[#141b2b] border border-[#1e2638] flex items-center justify-center text-orange-500 shrink-0">
                       <Target className="w-4 h-4" />
                     </div>
-                    <h4 className="font-black text-base text-white">
+                    <h4 className="font-black text-sm sm:text-base text-white">
                       {config.title}
                     </h4>
                   </div>
-                  <p className="text-xs text-neutral-400 pl-10">
+                  <p className="text-xs text-neutral-400 pl-0 sm:pl-10.5 mt-1 leading-relaxed">
                     {config.description}
                   </p>
                 </div>
@@ -173,7 +173,7 @@ export default function GoalForm({ initialGoals, userId }: GoalFormProps) {
               </div>
 
               {/* Input giá trị & Nút Lưu */}
-              <div className="flex items-center gap-3 mt-4 pt-4 border-t border-[#1e2638]">
+              <div className="flex items-center gap-2.5 sm:gap-3 mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-[#1e2638]">
                 <div className="relative flex-1">
                   <input
                     type="number"
@@ -190,9 +190,9 @@ export default function GoalForm({ initialGoals, userId }: GoalFormProps) {
                         },
                       }))
                     }
-                    className="w-full pl-4 pr-14 py-3 rounded-2xl border border-[#1e2638] bg-[#141b2b] text-base font-bold text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 disabled:opacity-40 transition [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    className="w-full pl-3.5 sm:pl-4 pr-12 sm:pr-14 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl border border-[#1e2638] bg-[#141b2b] text-sm sm:text-base font-bold text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 disabled:opacity-40 transition [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-neutral-400 uppercase">
+                  <span className="absolute right-3.5 sm:right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-neutral-400 uppercase">
                     {config.unit}
                   </span>
                 </div>
@@ -201,7 +201,7 @@ export default function GoalForm({ initialGoals, userId }: GoalFormProps) {
                   type="button"
                   disabled={isCurrentSaving || !state.is_active}
                   onClick={() => handleSaveGoal(config.type)}
-                  className={`px-6 py-3 rounded-2xl font-black text-xs transition-all flex items-center gap-2 shadow-md active:scale-[0.98] disabled:opacity-40 ${
+                  className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl font-black text-xs transition-all flex items-center gap-1.5 sm:gap-2 shadow-md active:scale-[0.98] disabled:opacity-40 shrink-0 cursor-pointer ${
                     state.is_active
                       ? "bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white"
                       : "bg-[#141b2b] border border-[#1e2638] text-neutral-500 cursor-not-allowed"

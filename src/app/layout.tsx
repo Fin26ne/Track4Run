@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="vi">
       <body className="antialiased min-h-screen flex flex-col justify-between selection:bg-orange-500 selection:text-white bg-[#f8fafc] dark:bg-[#0a0d14] text-neutral-900 dark:text-neutral-100">
         <Navbar />
-        <main className="flex-grow w-full max-w-3xl mx-auto px-4 sm:px-6 pt-5 sm:pt-8 pb-24 md:pb-12">
+        <main className="flex-grow w-full max-w-3xl mx-auto px-3.5 sm:px-6 pt-3.5 sm:pt-8 pb-28 md:pb-12">
           {children}
         </main>
         <BottomNav />

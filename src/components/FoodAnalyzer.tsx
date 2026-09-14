@@ -116,10 +116,10 @@ export default function FoodAnalyzer() {
   return (
     <div className="space-y-6">
       {/* Khối tải ảnh */}
-      <div className="bg-[#101522] border border-[#1e2638] rounded-3xl p-5 sm:p-7 shadow-xl">
-        <div className="mb-5">
-          <h2 className="text-lg font-black text-white flex items-center gap-2">
-            <Utensils className="w-5 h-5 text-emerald-500" />
+      <div className="bg-[#101522] border border-[#1e2638] rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-xl">
+        <div className="mb-4 sm:mb-5">
+          <h2 className="text-base sm:text-lg font-black text-white flex items-center gap-2">
+            <Utensils className="w-5 h-5 text-emerald-500 shrink-0" />
             Nhận diện calo bữa ăn
           </h2>
           <p className="text-xs sm:text-sm text-neutral-400 mt-1">
@@ -138,7 +138,7 @@ export default function FoodAnalyzer() {
 
       {/* Loading state: Athletic Biometric Vision Scanner */}
       {loading && (
-        <div className="bg-[#101522] border border-[#1e2638] rounded-3xl p-8 text-center space-y-5">
+        <div className="bg-[#101522] border border-[#1e2638] rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-center space-y-4 sm:space-y-5">
           {/* Athletic Waveform Scanner */}
           <div className="flex items-center justify-center gap-1.5 h-10">
             <span className="w-1.5 bg-emerald-500 rounded-full animate-wave-1" />
@@ -169,7 +169,7 @@ export default function FoodAnalyzer() {
 
       {/* Error state */}
       {error && (
-        <div className="bg-red-950/30 border border-red-900/60 rounded-2xl p-4 flex items-start gap-3">
+        <div className="bg-red-950/30 border border-red-900/60 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 flex items-start gap-2.5 sm:gap-3">
           <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
           <div className="space-y-1">
             <h3 className="font-bold text-red-200 text-sm">
@@ -184,38 +184,38 @@ export default function FoodAnalyzer() {
 
       {/* Kết quả phân tích */}
       {result && (
-        <div className="space-y-5 animate-fadeIn">
+        <div className="space-y-4 sm:space-y-5 animate-fadeIn">
           {/* Card tổng calo nổi bật + Nút Lưu Nhật Ký */}
-          <div className="bg-gradient-to-br from-[#101522] via-[#121827] to-[#141b2b] border border-[#1e2638] rounded-3xl p-6 sm:p-7 shadow-xl space-y-5">
-            <div className="flex items-center justify-between">
+          <div className="bg-gradient-to-br from-[#101522] via-[#121827] to-[#141b2b] border border-[#1e2638] rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-xl space-y-4 sm:space-y-5">
+            <div className="flex items-center justify-between gap-2">
               <div>
-                <span className="text-[11px] font-extrabold uppercase tracking-widest text-neutral-400">
+                <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-neutral-400">
                   Tổng năng lượng bữa ăn
                 </span>
-                <div className="flex items-baseline gap-2 mt-1.5">
-                  <span className="text-4xl sm:text-5xl font-black tracking-tight text-white">
+                <div className="flex items-baseline gap-1.5 sm:gap-2 mt-1">
+                  <span className="text-3xl sm:text-5xl font-black tracking-tight text-white font-mono">
                     {result.totalMealCalories.toLocaleString()}
                   </span>
-                  <span className="text-lg font-bold text-neutral-400">
+                  <span className="text-base sm:text-lg font-bold text-neutral-400">
                     kcal
                   </span>
                 </div>
               </div>
-              <div className="w-14 h-14 rounded-2xl bg-[#141b2b] border border-[#1e2638] text-orange-400 flex items-center justify-center shadow-md">
-                <Flame className="w-8 h-8" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-[#141b2b] border border-[#1e2638] text-orange-400 flex items-center justify-center shadow-md shrink-0">
+                <Flame className="w-6 h-6 sm:w-8 sm:h-8 fill-orange-500 text-orange-500" />
               </div>
             </div>
 
             {/* Nút lưu vào nhật ký Supabase */}
-            <div className="pt-4 border-t border-[#1e2638] flex flex-wrap items-center justify-between gap-3">
+            <div className="pt-3 sm:pt-4 border-t border-[#1e2638] flex flex-wrap items-center justify-between gap-3">
               <button
                 type="button"
                 disabled={saving || savedSuccess || (result.items.length === 0)}
                 onClick={handleSaveToDatabase}
-                className={`px-6 py-3 rounded-2xl text-xs font-black tracking-wide transition-all flex items-center gap-2 shadow-lg active:scale-[0.98] ${
+                className={`w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl text-xs font-black tracking-wide transition-all flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] ${
                   savedSuccess
                     ? "bg-emerald-600 text-white"
-                    : "bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white shadow-emerald-500/20 disabled:opacity-50"
+                    : "bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white shadow-emerald-500/20 disabled:opacity-50 cursor-pointer"
                 }`}
               >
                 <CheckCircle2 className="w-4 h-4" />
@@ -238,8 +238,8 @@ export default function FoodAnalyzer() {
 
           {/* Ghi chú dinh dưỡng từ AI */}
           {result.note && (
-            <div className="bg-[#101522] border border-[#1e2638] rounded-2xl p-4 sm:p-5 flex items-start gap-3">
-              <Info className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+            <div className="bg-[#101522] border border-[#1e2638] rounded-xl sm:rounded-2xl p-3.5 sm:p-5 flex items-start gap-2.5 sm:gap-3">
+              <Info className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 shrink-0 mt-0.5" />
               <div className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
                 <span className="font-bold text-white">
                   Nhận xét của AI:{" "}
@@ -251,9 +251,9 @@ export default function FoodAnalyzer() {
 
           {/* Danh sách từng món ăn */}
           {result.items && result.items.length > 0 ? (
-            <div className="bg-[#101522] border border-[#1e2638] rounded-3xl overflow-hidden shadow-xl">
-              <div className="p-4 sm:p-5 border-b border-[#1e2638] bg-[#0c0f17] flex items-center justify-between">
-                <h3 className="font-black text-white text-sm">
+            <div className="bg-[#101522] border border-[#1e2638] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl">
+              <div className="p-3.5 sm:p-5 border-b border-[#1e2638] bg-[#0c0f17] flex items-center justify-between">
+                <h3 className="font-black text-white text-xs sm:text-sm">
                   Chi tiết thành phần món ăn ({result.items.length} món)
                 </h3>
               </div>
@@ -262,27 +262,27 @@ export default function FoodAnalyzer() {
                 {result.items.map((item, index) => (
                   <div
                     key={index}
-                    className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#141b2b]/40 transition"
+                    className="p-3.5 sm:p-5 flex items-center justify-between gap-2.5 sm:gap-3 hover:bg-[#141b2b]/40 transition"
                   >
-                    <div className="space-y-1.5">
-                      <div className="flex items-center gap-2.5">
-                        <span className="font-bold text-white text-sm sm:text-base">
+                    <div className="space-y-1 min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2.5">
+                        <span className="font-bold text-white text-xs sm:text-base">
                           {item.name}
                         </span>
                         {renderConfidenceBadge(item.confidence)}
                       </div>
-                      <div className="text-xs text-neutral-400 flex items-center gap-3">
-                        <span>Khối lượng: ~{item.weightGrams}g</span>
+                      <div className="text-[11px] sm:text-xs text-neutral-400 flex flex-wrap items-center gap-1.5 sm:gap-3">
+                        <span>~{item.weightGrams}g</span>
                         <span>•</span>
-                        <span>Mật độ: {item.caloriesPer100g} kcal / 100g</span>
+                        <span>{item.caloriesPer100g} kcal/100g</span>
                       </div>
                     </div>
 
-                    <div className="text-right sm:text-right">
-                      <span className="text-xl font-black text-white">
+                    <div className="text-right shrink-0">
+                      <span className="text-lg sm:text-xl font-black text-white font-mono">
                         {item.totalCalories}
                       </span>
-                      <span className="text-xs font-bold text-neutral-400 ml-1">
+                      <span className="text-[10px] sm:text-xs font-bold text-neutral-400 ml-1">
                         kcal
                       </span>
                     </div>
@@ -291,7 +291,7 @@ export default function FoodAnalyzer() {
               </div>
             </div>
           ) : (
-            <div className="bg-[#101522] border border-[#1e2638] rounded-2xl p-6 text-center text-xs sm:text-sm text-neutral-400">
+            <div className="bg-[#101522] border border-[#1e2638] rounded-xl sm:rounded-2xl p-5 sm:p-6 text-center text-xs sm:text-sm text-neutral-400">
               Không phát hiện được món ăn cụ thể nào trong ảnh này.
             </div>
           )}

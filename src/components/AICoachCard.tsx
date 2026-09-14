@@ -81,24 +81,24 @@ export default function AICoachCard({
   };
 
   return (
-    <div className="bg-[#101522] border border-[#1e2638] rounded-3xl p-5 sm:p-7 shadow-xl space-y-6 relative overflow-hidden animate-fadeIn">
+    <div className="bg-[#101522] border border-[#1e2638] rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-xl space-y-4 sm:space-y-6 relative overflow-hidden animate-fadeIn">
       {/* Quầng sáng nền */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-orange-500/10 via-amber-500/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
       {/* Header AI Coach */}
-      <div className="flex items-center justify-between relative z-10">
-        <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-white shadow-md shadow-orange-500/25">
-            <Award className="w-6 h-6" />
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 relative z-10">
+        <div className="flex items-center gap-2.5 sm:gap-3">
+          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-white shadow-md shadow-orange-500/25 shrink-0">
+            <Award className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] font-extrabold uppercase tracking-widest text-orange-500">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-orange-500">
                 ACSM Certified AI Coach
               </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse shrink-0" />
             </div>
-            <h2 className="text-xl font-black tracking-tight text-white">
+            <h2 className="text-lg sm:text-xl font-black tracking-tight text-white leading-snug">
               Cố vấn Dinh dưỡng & Thể thao
             </h2>
           </div>
@@ -108,7 +108,7 @@ export default function AICoachCard({
           type="button"
           disabled={loading}
           onClick={handleRequestAdvice}
-          className="px-4 py-2 rounded-xl text-xs font-black bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 border border-orange-500/30 transition flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+          className="w-full sm:w-auto px-3.5 sm:px-4 py-2 rounded-xl text-xs font-black bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 border border-orange-500/30 transition flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
           <span>{advice ? "Cập nhật" : "Phân tích 30 ngày"}</span>
@@ -116,14 +116,14 @@ export default function AICoachCard({
       </div>
 
       {/* Bộ 4 chỉ số sinh lý học thể thao 30 ngày */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 relative z-10">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 relative z-10">
         {/* Chỉ số 1: Thâm hụt calo */}
-        <div className="p-3.5 rounded-2xl bg-[#141b2b] border border-[#1e2638] space-y-1">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-neutral-400 block">
+        <div className="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl bg-[#141b2b] border border-[#1e2638] space-y-0.5 sm:space-y-1">
+          <span className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider text-neutral-400 block truncate">
             Net Calo 30 ngày
           </span>
           <div className="flex items-baseline gap-1">
-            <span className={`text-xl font-black ${isDeficit ? "text-emerald-400" : "text-orange-400"}`}>
+            <span className={`text-lg sm:text-xl font-black ${isDeficit ? "text-emerald-400" : "text-orange-400"}`}>
               {isDeficit ? `-${Math.abs(netCalories).toLocaleString()}` : `+${netCalories.toLocaleString()}`}
             </span>
             <span className="text-[10px] font-bold text-neutral-400">kcal</span>
@@ -134,28 +134,28 @@ export default function AICoachCard({
         </div>
 
         {/* Chỉ số 2: Quy đổi mỡ ACSM */}
-        <div className="p-3.5 rounded-2xl bg-[#141b2b] border border-[#1e2638] space-y-1">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-neutral-400 block">
-            Dự kiến mỡ thay đổi
+        <div className="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl bg-[#141b2b] border border-[#1e2638] space-y-0.5 sm:space-y-1">
+          <span className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider text-neutral-400 block truncate">
+            Dự kiến mỡ đổi
           </span>
           <div className="flex items-baseline gap-1">
-            <span className={`text-xl font-black ${isDeficit ? "text-emerald-400" : "text-amber-400"}`}>
+            <span className={`text-lg sm:text-xl font-black ${isDeficit ? "text-emerald-400" : "text-amber-400"}`}>
               {isDeficit ? `-${fatChangeKg}` : `+${fatChangeKg}`}
             </span>
-            <span className="text-[10px] font-bold text-neutral-400">kg mỡ</span>
+            <span className="text-[10px] font-bold text-neutral-400">kg</span>
           </div>
           <span className="text-[10px] text-neutral-400 block truncate">
-            Chuẩn ACSM (7.7k kcal/kg)
+            Chuẩn ACSM (7.7k)
           </span>
         </div>
 
         {/* Chỉ số 3: Quãng đường chạy */}
-        <div className="p-3.5 rounded-2xl bg-[#141b2b] border border-[#1e2638] space-y-1">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-neutral-400 block">
-            Tổng chạy tích lũy
+        <div className="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl bg-[#141b2b] border border-[#1e2638] space-y-0.5 sm:space-y-1">
+          <span className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider text-neutral-400 block truncate">
+            Chạy tích lũy
           </span>
           <div className="flex items-baseline gap-1">
-            <span className="text-xl font-black text-white">
+            <span className="text-lg sm:text-xl font-black text-white">
               {totalDistanceKm}
             </span>
             <span className="text-[10px] font-bold text-neutral-400">km</span>
@@ -166,27 +166,27 @@ export default function AICoachCard({
         </div>
 
         {/* Chỉ số 4: Kỷ luật & Đánh giá an toàn */}
-        <div className="p-3.5 rounded-2xl bg-[#141b2b] border border-[#1e2638] space-y-1">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-neutral-400 block">
+        <div className="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl bg-[#141b2b] border border-[#1e2638] space-y-0.5 sm:space-y-1">
+          <span className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider text-neutral-400 block truncate">
             Tốc độ thâm hụt
           </span>
           <div className="pt-0.5">
             {isDeficit && dailyAvgDeficit >= 300 && dailyAvgDeficit <= 650 ? (
-              <span className="inline-flex items-center gap-1 text-[11px] font-black text-emerald-400">
-                <CheckCircle2 className="w-3.5 h-3.5" /> Chuẩn vàng
+              <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-black text-emerald-400">
+                <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" /> Chuẩn vàng
               </span>
             ) : isDeficit && dailyAvgDeficit > 650 ? (
-              <span className="inline-flex items-center gap-1 text-[11px] font-black text-amber-400">
-                <AlertTriangle className="w-3.5 h-3.5" /> Thâm hụt sâu
+              <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-black text-amber-400">
+                <AlertTriangle className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" /> Thâm hụt sâu
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1 text-[11px] font-black text-orange-400">
-                <Flame className="w-3.5 h-3.5" /> Thặng dư calo
+              <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-black text-orange-400">
+                <Flame className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" /> Thặng dư
               </span>
             )}
           </div>
           <span className="text-[10px] text-neutral-400 block truncate">
-            {streak > 0 ? `Streak ${streak} ngày liên tiếp` : "Duy trì ghi log đều đặn"}
+            {streak > 0 ? `Streak ${streak} ngày` : "Duy trì log"}
           </span>
         </div>
       </div>
@@ -280,7 +280,7 @@ export default function AICoachCard({
           </div>
         </div>
       ) : !loading && (
-        <div className="p-5 rounded-2xl bg-[#141b2b]/60 border border-[#1e2638] flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+        <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-[#141b2b]/60 border border-[#1e2638] flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
           <div className="space-y-1">
             <p className="text-xs font-bold text-white">
               Bấm nút &quot;Phân tích 30 ngày&quot; để nhận lời khuyên dinh dưỡng & chạy bộ
@@ -292,7 +292,7 @@ export default function AICoachCard({
           <button
             type="button"
             onClick={handleRequestAdvice}
-            className="px-5 py-2.5 rounded-xl font-black text-xs bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-md shadow-orange-500/20 active:scale-[0.98] transition cursor-pointer whitespace-nowrap"
+            className="w-full sm:w-auto px-5 py-2.5 rounded-xl font-black text-xs bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-md shadow-orange-500/20 active:scale-[0.98] transition cursor-pointer whitespace-nowrap text-center"
           >
             Nhận lời khuyên AI Coach
           </button>

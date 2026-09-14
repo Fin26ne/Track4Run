@@ -240,28 +240,28 @@ export default function RunCalculator() {
     return (
       <div className="space-y-4 animate-fadeIn">
         {/* Card Tổng Calo Hero + Nút Lưu */}
-        <div className="bg-[#101522] border border-neutral-800 text-white rounded-3xl p-6 sm:p-7 shadow-2xl relative overflow-hidden space-y-6">
+        <div className="bg-[#101522] border border-neutral-800 text-white rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-2xl relative overflow-hidden space-y-4 sm:space-y-6">
           <div className="absolute -top-12 -right-12 w-48 h-48 bg-orange-500/15 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="flex items-center justify-between relative z-10">
+          <div className="flex items-center justify-between relative z-10 gap-2">
             <div>
-              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-orange-400">
-                <Flame className="w-4 h-4 fill-orange-500 text-orange-500" />
-                <span>Năng lượng tiêu thụ (Chuẩn ACSM)</span>
+              <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-black uppercase tracking-wider text-orange-400">
+                <Flame className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-orange-500 text-orange-500" />
+                <span>Năng lượng tiêu thụ (ACSM)</span>
               </div>
-              <div className="flex items-baseline gap-2 mt-2">
-                <span className="text-5xl sm:text-6xl font-black tracking-tight text-white font-mono">
+              <div className="flex items-baseline gap-1.5 sm:gap-2 mt-1 sm:mt-2">
+                <span className="text-4xl sm:text-6xl font-black tracking-tight text-white font-mono">
                   {res.totalCaloriesBurned.toLocaleString()}
                 </span>
-                <span className="text-xl font-black text-orange-400">
+                <span className="text-base sm:text-xl font-black text-orange-400">
                   kcal
                 </span>
               </div>
             </div>
 
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500/20 to-amber-500/20 border border-orange-500/30 text-orange-400 flex items-center justify-center shadow-inner">
-              <Flame className="w-9 h-9 fill-orange-500 text-orange-500 animate-pulse" />
+            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-orange-500/20 to-amber-500/20 border border-orange-500/30 text-orange-400 flex items-center justify-center shadow-inner shrink-0">
+              <Flame className="w-6 h-6 sm:w-9 sm:h-9 fill-orange-500 text-orange-500 animate-pulse" />
             </div>
           </div>
 
@@ -271,7 +271,7 @@ export default function RunCalculator() {
               type="button"
               disabled={savingRun || savedRunSuccess || res.totalCaloriesBurned === 0}
               onClick={() => handleSaveRunToDatabase(res, dist, dur, src)}
-              className={`px-5 py-3 rounded-2xl text-xs sm:text-sm font-black transition flex items-center gap-2 shadow-md cursor-pointer ${
+              className={`w-full sm:w-auto px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-black transition flex items-center justify-center gap-2 shadow-md cursor-pointer ${
                 savedRunSuccess
                   ? "bg-emerald-600 text-white shadow-emerald-500/25"
                   : "bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white shadow-emerald-500/20 active:scale-95 disabled:opacity-50"
@@ -297,8 +297,8 @@ export default function RunCalculator() {
 
         {/* Cảnh báo vận tốc nếu có */}
         {res.warning && (
-          <div className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4 flex items-start gap-3">
-            <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+          <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 flex items-start gap-2.5 sm:gap-3">
+            <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 shrink-0 mt-0.5" />
             <p className="text-xs text-amber-200/90 leading-relaxed">
               {res.warning}
             </p>
@@ -306,50 +306,50 @@ export default function RunCalculator() {
         )}
 
         {/* Bảng chi tiết các chỉ số sinh lý ACSM */}
-        <div className="bg-[#101522] border border-neutral-800/80 rounded-3xl p-5 sm:p-6 shadow-md">
-          <h4 className="text-xs font-black uppercase tracking-wider text-neutral-400 mb-3.5 flex items-center gap-2">
-            <Gauge className="w-4 h-4 text-emerald-400" />
+        <div className="bg-[#101522] border border-neutral-800/80 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-md">
+          <h4 className="text-[11px] sm:text-xs font-black uppercase tracking-wider text-neutral-400 mb-3 flex items-center gap-2">
+            <Gauge className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
             Chỉ số chuyển hóa sinh lý học thực tế
           </h4>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div className="p-3.5 bg-[#141b2b] border border-neutral-800/90 rounded-2xl">
-              <span className="text-xs text-neutral-400 block font-medium">Vận tốc</span>
-              <span className="text-lg font-black text-white font-mono mt-0.5 block">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+            <div className="p-2.5 sm:p-3.5 bg-[#141b2b] border border-neutral-800/90 rounded-xl sm:rounded-2xl">
+              <span className="text-[11px] sm:text-xs text-neutral-400 block font-medium">Vận tốc</span>
+              <span className="text-base sm:text-lg font-black text-white font-mono mt-0.5 block">
                 {res.speedKmH}{" "}
-                <span className="text-xs font-semibold text-neutral-400">km/h</span>
+                <span className="text-[10px] sm:text-xs font-semibold text-neutral-400">km/h</span>
               </span>
-              <span className="text-[11px] text-emerald-400/90 font-medium block mt-1">
+              <span className="text-[10px] sm:text-[11px] text-emerald-400/90 font-medium block mt-0.5 sm:mt-1 truncate">
                 ~{res.speedMPerMin} m/phút
               </span>
             </div>
 
-            <div className="p-3.5 bg-[#141b2b] border border-neutral-800/90 rounded-2xl">
-              <span className="text-xs text-neutral-400 block font-medium">Oxy tiêu thụ (VO₂)</span>
-              <span className="text-lg font-black text-white font-mono mt-0.5 block">
+            <div className="p-2.5 sm:p-3.5 bg-[#141b2b] border border-neutral-800/90 rounded-xl sm:rounded-2xl">
+              <span className="text-[11px] sm:text-xs text-neutral-400 block font-medium">VO₂ tiêu thụ</span>
+              <span className="text-base sm:text-lg font-black text-white font-mono mt-0.5 block">
                 {res.vo2}
               </span>
-              <span className="text-[11px] text-neutral-400 block mt-1">
+              <span className="text-[10px] sm:text-[11px] text-neutral-400 block mt-0.5 sm:mt-1 truncate">
                 ml / kg / phút
               </span>
             </div>
 
-            <div className="p-3.5 bg-[#141b2b] border border-neutral-800/90 rounded-2xl">
-              <span className="text-xs text-neutral-400 block font-medium">Hệ số MET</span>
-              <span className="text-lg font-black text-amber-400 font-mono mt-0.5 block">
+            <div className="p-2.5 sm:p-3.5 bg-[#141b2b] border border-neutral-800/90 rounded-xl sm:rounded-2xl">
+              <span className="text-[11px] sm:text-xs text-neutral-400 block font-medium">Hệ số MET</span>
+              <span className="text-base sm:text-lg font-black text-amber-400 font-mono mt-0.5 block">
                 {res.met}
               </span>
-              <span className="text-[11px] text-neutral-400 block mt-1">
+              <span className="text-[10px] sm:text-[11px] text-neutral-400 block mt-0.5 sm:mt-1 truncate">
                 = VO₂ / 3.5
               </span>
             </div>
 
-            <div className="p-3.5 bg-[#141b2b] border border-neutral-800/90 rounded-2xl">
-              <span className="text-xs text-neutral-400 block font-medium">Tốc độ đốt</span>
-              <span className="text-lg font-black text-orange-400 font-mono mt-0.5 block">
+            <div className="p-2.5 sm:p-3.5 bg-[#141b2b] border border-neutral-800/90 rounded-xl sm:rounded-2xl">
+              <span className="text-[11px] sm:text-xs text-neutral-400 block font-medium">Tốc độ đốt</span>
+              <span className="text-base sm:text-lg font-black text-orange-400 font-mono mt-0.5 block">
                 {res.kcalPerMinute}
               </span>
-              <span className="text-[11px] text-neutral-400 block mt-1">
+              <span className="text-[10px] sm:text-[11px] text-neutral-400 block mt-0.5 sm:mt-1 truncate">
                 kcal / phút
               </span>
             </div>
@@ -378,37 +378,39 @@ export default function RunCalculator() {
         <button
           type="button"
           onClick={() => setSubTab("manual")}
-          className={`flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-2.5 transition-all cursor-pointer ${
+          className={`flex-1 py-2.5 sm:py-3 px-2 sm:px-4 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-1.5 sm:gap-2.5 transition-all cursor-pointer ${
             subTab === "manual"
               ? "bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-md shadow-orange-500/20"
               : "text-neutral-400 hover:text-white hover:bg-neutral-800/40"
           }`}
         >
-          <Edit3 className="w-4 h-4" />
-          <span>Nhập tay thông số</span>
+          <Edit3 className="w-4 h-4 shrink-0" />
+          <span className="hidden sm:inline">Nhập tay thông số</span>
+          <span className="sm:hidden">Nhập tay</span>
         </button>
 
         <button
           type="button"
           onClick={() => setSubTab("photo")}
-          className={`flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-2.5 transition-all cursor-pointer ${
+          className={`flex-1 py-2.5 sm:py-3 px-2 sm:px-4 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-1.5 sm:gap-2.5 transition-all cursor-pointer ${
             subTab === "photo"
               ? "bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-md shadow-orange-500/20"
               : "text-neutral-400 hover:text-white hover:bg-neutral-800/40"
           }`}
         >
-          <Watch className="w-4 h-4" />
-          <span>Quét ảnh đồng hồ (Garmin / Strava)</span>
+          <Watch className="w-4 h-4 shrink-0" />
+          <span className="hidden sm:inline">Quét ảnh đồng hồ (Garmin / Strava)</span>
+          <span className="sm:hidden">Ảnh đồng hồ</span>
         </button>
       </div>
 
       {/* SUB-TAB 1: NHẬP TAY */}
       {subTab === "manual" && (
-        <div className="space-y-6">
-          <div className="bg-[#101522] border border-neutral-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-neutral-800/80">
+        <div className="space-y-4 sm:space-y-6">
+          <div className="bg-[#101522] border border-neutral-800/90 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-2xl relative overflow-hidden space-y-4 sm:space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 sm:pb-5 border-b border-neutral-800/80">
               <div>
-                <h3 className="text-lg font-black text-white flex items-center gap-2">
+                <h3 className="text-base sm:text-lg font-black text-white flex items-center gap-2">
                   <Flame className="w-5 h-5 text-orange-500" />
                   <span>Thông số buổi chạy</span>
                 </h3>
@@ -446,9 +448,9 @@ export default function RunCalculator() {
               </div>
             </div>
 
-            <form onSubmit={handleCalculateManual} className="space-y-6">
+            <form onSubmit={handleCalculateManual} className="space-y-4 sm:space-y-6">
               {/* PHẦN 1: QUÃNG ĐƯỜNG */}
-              <div className="space-y-2.5">
+              <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-extrabold uppercase tracking-wider text-neutral-300">
                     Quãng đường chạy
@@ -465,15 +467,15 @@ export default function RunCalculator() {
                     value={manualDistance}
                     onChange={(e) => setManualDistance(e.target.value)}
                     placeholder="5.0"
-                    className="w-full px-5 py-3.5 rounded-2xl border border-neutral-800 bg-[#141b2b] text-white text-xl sm:text-2xl font-black font-mono focus:outline-none focus:border-orange-500 transition shadow-inner placeholder:text-neutral-600"
+                    className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl border border-neutral-800 bg-[#141b2b] text-white text-xl sm:text-2xl font-black font-mono focus:outline-none focus:border-orange-500 transition shadow-inner placeholder:text-neutral-600"
                   />
-                  <span className="absolute right-5 top-1/2 -translate-y-1/2 text-xs font-black px-2 py-1 rounded-md bg-neutral-800 text-neutral-300 tracking-wider">
+                  <span className="absolute right-4 sm:right-5 top-1/2 -translate-y-1/2 text-xs font-black px-2 py-1 rounded-md bg-neutral-800 text-neutral-300 tracking-wider">
                     KM
                   </span>
                 </div>
 
                 {/* Quick Presets for Distance */}
-                <div className="flex flex-wrap items-center gap-2 pt-1">
+                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-1">
                   <span className="text-[11px] font-semibold text-neutral-400 mr-1">Cự ly mẫu:</span>
                   {[
                     { label: "3 km", val: "3" },
@@ -486,7 +488,7 @@ export default function RunCalculator() {
                       key={preset.label}
                       type="button"
                       onClick={() => setManualDistance(preset.val)}
-                      className={`px-3 py-1 rounded-xl text-xs font-bold transition cursor-pointer ${
+                      className={`px-2.5 sm:px-3 py-1 rounded-lg sm:rounded-xl text-xs font-bold transition cursor-pointer ${
                         manualDistance === preset.val
                           ? "bg-orange-500 text-white shadow-sm"
                           : "bg-[#141b2b] text-neutral-400 border border-neutral-800 hover:text-white hover:border-neutral-700"
@@ -500,7 +502,7 @@ export default function RunCalculator() {
 
               {/* PHẦN 2: TỐC ĐỘ (PACE HOẶC THỜI GIAN) */}
               {speedMode === "pace" ? (
-                <div className="space-y-3 p-4 sm:p-5 rounded-2xl bg-[#141b2b] border border-neutral-800/80">
+                <div className="space-y-3 p-3.5 sm:p-5 rounded-xl sm:rounded-2xl bg-[#141b2b] border border-neutral-800/80">
                   <div className="flex items-center justify-between">
                     <label className="text-xs font-extrabold uppercase tracking-wider text-orange-400 flex items-center gap-1.5">
                       <Timer className="w-4 h-4" />
@@ -510,14 +512,14 @@ export default function RunCalculator() {
                   </div>
 
                   {/* Stopwatch digital style inputs */}
-                  <div className="flex items-center justify-center gap-3 py-2">
+                  <div className="flex items-center justify-center gap-1.5 sm:gap-3 py-1 sm:py-2">
                     {/* Minutes */}
                     <div className="flex flex-col items-center">
-                      <div className="flex items-center gap-1.5">
+                      <div className="flex items-center gap-1 sm:gap-1.5">
                         <button
                           type="button"
                           onClick={() => setPaceMinutes(String(Math.max(2, (parseInt(paceMinutes, 10) || 5) - 1)))}
-                          className="w-9 h-11 rounded-xl bg-[#1a2337] border border-neutral-700 hover:bg-neutral-700 text-neutral-300 font-black text-lg flex items-center justify-center active:scale-95 transition cursor-pointer"
+                          className="w-8 sm:w-9 h-10 sm:h-11 rounded-lg sm:rounded-xl bg-[#1a2337] border border-neutral-700 hover:bg-neutral-700 text-neutral-300 font-black text-base sm:text-lg flex items-center justify-center active:scale-95 transition cursor-pointer"
                         >
                           -
                         </button>
@@ -528,12 +530,12 @@ export default function RunCalculator() {
                           required
                           value={paceMinutes}
                           onChange={(e) => setPaceMinutes(e.target.value)}
-                          className="w-16 h-11 text-center rounded-xl border border-neutral-700 bg-[#101522] text-white font-black text-2xl font-mono focus:outline-none focus:border-orange-500"
+                          className="w-12 sm:w-16 h-10 sm:h-11 text-center rounded-lg sm:rounded-xl border border-neutral-700 bg-[#101522] text-white font-black text-xl sm:text-2xl font-mono focus:outline-none focus:border-orange-500"
                         />
                         <button
                           type="button"
                           onClick={() => setPaceMinutes(String(Math.min(25, (parseInt(paceMinutes, 10) || 5) + 1)))}
-                          className="w-9 h-11 rounded-xl bg-[#1a2337] border border-neutral-700 hover:bg-neutral-700 text-neutral-300 font-black text-lg flex items-center justify-center active:scale-95 transition cursor-pointer"
+                          className="w-8 sm:w-9 h-10 sm:h-11 rounded-lg sm:rounded-xl bg-[#1a2337] border border-neutral-700 hover:bg-neutral-700 text-neutral-300 font-black text-base sm:text-lg flex items-center justify-center active:scale-95 transition cursor-pointer"
                         >
                           +
                         </button>
@@ -541,11 +543,11 @@ export default function RunCalculator() {
                       <span className="text-[10px] uppercase tracking-wider font-bold text-neutral-400 mt-1">Phút</span>
                     </div>
 
-                    <span className="text-3xl font-black text-orange-500 mb-4">:</span>
+                    <span className="text-2xl sm:text-3xl font-black text-orange-500 mb-3 sm:mb-4">:</span>
 
                     {/* Seconds */}
                     <div className="flex flex-col items-center">
-                      <div className="flex items-center gap-1.5">
+                      <div className="flex items-center gap-1 sm:gap-1.5">
                         <button
                           type="button"
                           onClick={() => {
@@ -553,7 +555,7 @@ export default function RunCalculator() {
                             const next = cur <= 0 ? 55 : cur - 5;
                             setPaceSeconds(String(next).padStart(2, "0"));
                           }}
-                          className="w-9 h-11 rounded-xl bg-[#1a2337] border border-neutral-700 hover:bg-neutral-700 text-neutral-300 font-black text-lg flex items-center justify-center active:scale-95 transition cursor-pointer"
+                          className="w-8 sm:w-9 h-10 sm:h-11 rounded-lg sm:rounded-xl bg-[#1a2337] border border-neutral-700 hover:bg-neutral-700 text-neutral-300 font-black text-base sm:text-lg flex items-center justify-center active:scale-95 transition cursor-pointer"
                         >
                           -
                         </button>
@@ -564,7 +566,7 @@ export default function RunCalculator() {
                           required
                           value={paceSeconds}
                           onChange={(e) => setPaceSeconds(e.target.value)}
-                          className="w-16 h-11 text-center rounded-xl border border-neutral-700 bg-[#101522] text-white font-black text-2xl font-mono focus:outline-none focus:border-orange-500"
+                          className="w-12 sm:w-16 h-10 sm:h-11 text-center rounded-lg sm:rounded-xl border border-neutral-700 bg-[#101522] text-white font-black text-xl sm:text-2xl font-mono focus:outline-none focus:border-orange-500"
                         />
                         <button
                           type="button"
@@ -573,7 +575,7 @@ export default function RunCalculator() {
                             const next = cur >= 55 ? 0 : cur + 5;
                             setPaceSeconds(String(next).padStart(2, "0"));
                           }}
-                          className="w-9 h-11 rounded-xl bg-[#1a2337] border border-neutral-700 hover:bg-neutral-700 text-neutral-300 font-black text-lg flex items-center justify-center active:scale-95 transition cursor-pointer"
+                          className="w-8 sm:w-9 h-10 sm:h-11 rounded-lg sm:rounded-xl bg-[#1a2337] border border-neutral-700 hover:bg-neutral-700 text-neutral-300 font-black text-base sm:text-lg flex items-center justify-center active:scale-95 transition cursor-pointer"
                         >
                           +
                         </button>
@@ -581,13 +583,13 @@ export default function RunCalculator() {
                       <span className="text-[10px] uppercase tracking-wider font-bold text-neutral-400 mt-1">Giây</span>
                     </div>
 
-                    <div className="mb-4 pl-2">
-                      <span className="text-xs font-black text-neutral-400 bg-neutral-800/80 px-2 py-1 rounded-lg">/ km</span>
+                    <div className="mb-3 sm:mb-4 pl-1 sm:pl-2">
+                      <span className="text-[11px] sm:text-xs font-black text-neutral-400 bg-neutral-800/80 px-1.5 sm:px-2 py-1 rounded-md sm:rounded-lg">/ km</span>
                     </div>
                   </div>
 
                   {/* Quick Pace Presets */}
-                  <div className="flex flex-wrap items-center justify-center gap-2 pt-2 border-t border-neutral-800/80">
+                  <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 pt-2 border-t border-neutral-800/80">
                     <span className="text-[11px] font-semibold text-neutral-400">Pace phổ biến:</span>
                     {[
                       { label: "4:30", min: "4", sec: "30" },
@@ -606,7 +608,7 @@ export default function RunCalculator() {
                             setPaceMinutes(p.min);
                             setPaceSeconds(p.sec);
                           }}
-                          className={`px-3 py-1 rounded-xl text-xs font-bold transition font-mono cursor-pointer ${
+                          className={`px-2.5 sm:px-3 py-1 rounded-lg sm:rounded-xl text-xs font-bold transition font-mono cursor-pointer ${
                             isSel
                               ? "bg-orange-500 text-white shadow-sm"
                               : "bg-[#101522] text-neutral-400 border border-neutral-800 hover:text-white hover:border-neutral-700"
@@ -697,19 +699,19 @@ export default function RunCalculator() {
 
               {/* REALTIME WORKOUT HUD TICKER (DASHBOARD PREVIEW) */}
               {(calculatedMinutes > 0 || (distNum > 0 && durNum > 0)) && (
-                <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#121929] via-[#162035] to-[#121929] border border-orange-500/30 shadow-lg space-y-2.5 animate-fadeIn">
-                  <div className="flex items-center justify-between text-xs font-black text-orange-400 uppercase tracking-wider">
-                    <span className="flex items-center gap-1.5">
+                <div className="p-3.5 sm:p-5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#121929] via-[#162035] to-[#121929] border border-orange-500/30 shadow-lg space-y-2 sm:space-y-2.5 animate-fadeIn">
+                  <div className="flex items-center justify-between text-[11px] sm:text-xs font-black text-orange-400 uppercase tracking-wider">
+                    <span className="flex items-center gap-1 sm:gap-1.5">
                       <Sparkles className="w-3.5 h-3.5" />
                       Ước tính thời gian thực
                     </span>
-                    <span className="text-[11px] text-neutral-400 lowercase">công thức acsm</span>
+                    <span className="text-[10px] sm:text-[11px] text-neutral-400 lowercase">công thức acsm</span>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-1 text-center">
-                    <div className="p-3 rounded-xl bg-neutral-950/70 border border-neutral-800">
-                      <span className="text-[10px] text-neutral-400 block font-semibold">Thời gian</span>
-                      <span className="text-sm sm:text-base font-black text-white font-mono">
+                  <div className="grid grid-cols-3 gap-1.5 sm:gap-3 pt-1 text-center">
+                    <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-neutral-950/70 border border-neutral-800">
+                      <span className="text-[9px] sm:text-[10px] text-neutral-400 block font-semibold truncate">Thời gian</span>
+                      <span className="text-xs sm:text-base font-black text-white font-mono block mt-0.5">
                         {speedMode === "pace" ? (
                           `${Math.floor(calculatedMinutes)}m ${Math.round((calculatedMinutes - Math.floor(calculatedMinutes)) * 60).toString().padStart(2, "0")}s`
                         ) : (
@@ -718,9 +720,9 @@ export default function RunCalculator() {
                       </span>
                     </div>
 
-                    <div className="p-3 rounded-xl bg-neutral-950/70 border border-neutral-800">
-                      <span className="text-[10px] text-neutral-400 block font-semibold">Tốc độ TB</span>
-                      <span className="text-sm sm:text-base font-black text-emerald-400 font-mono">
+                    <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-neutral-950/70 border border-neutral-800">
+                      <span className="text-[9px] sm:text-[10px] text-neutral-400 block font-semibold truncate">Tốc độ TB</span>
+                      <span className="text-xs sm:text-base font-black text-emerald-400 font-mono block mt-0.5">
                         {speedMode === "pace" && calculatedMinutes > 0 ? (
                           `${(distNum / (calculatedMinutes / 60)).toFixed(1)} km/h`
                         ) : distNum > 0 && durNum > 0 ? (
@@ -729,11 +731,11 @@ export default function RunCalculator() {
                       </span>
                     </div>
 
-                    <div className="p-3 rounded-xl bg-neutral-950/70 border border-neutral-800">
-                      <span className="text-[10px] text-neutral-400 block font-semibold">Pace tương ứng</span>
-                      <span className="text-sm sm:text-base font-black text-amber-400 font-mono">
+                    <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-neutral-950/70 border border-neutral-800">
+                      <span className="text-[9px] sm:text-[10px] text-neutral-400 block font-semibold truncate">Pace quy đổi</span>
+                      <span className="text-xs sm:text-base font-black text-amber-400 font-mono block mt-0.5">
                         {speedMode === "pace" ? (
-                          `${paceMinutes}:${paceSeconds.padStart(2, "0")} /km`
+                          `${paceMinutes}:${paceSeconds.padStart(2, "0")}`
                         ) : (
                           calculatedPaceStr || "--:--"
                         )}
@@ -746,9 +748,9 @@ export default function RunCalculator() {
               {/* ACTION BUTTON: STRAVA ORANGE GRADIENT */}
               <button
                 type="submit"
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black text-base tracking-wide shadow-lg shadow-orange-500/25 active:scale-[0.99] transition flex items-center justify-center gap-2.5 cursor-pointer"
+                className="w-full py-3.5 sm:py-4 rounded-xl sm:rounded-2xl bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black text-sm sm:text-base tracking-wide shadow-lg shadow-orange-500/25 active:scale-[0.99] transition flex items-center justify-center gap-2 cursor-pointer"
               >
-                <Flame className="w-5 h-5 fill-white" />
+                <Flame className="w-4 h-4 sm:w-5 sm:h-5 fill-white" />
                 <span>TÍNH TOÁN CALO ACSM</span>
               </button>
             </form>
@@ -772,10 +774,10 @@ export default function RunCalculator() {
 
       {/* SUB-TAB 2: CHỤP ẢNH ĐỒNG HỒ */}
       {subTab === "photo" && (
-        <div className="space-y-6">
-          <div className="bg-[#101522] border border-neutral-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-4">
-            <h3 className="text-lg font-black text-white flex items-center gap-2">
-              <Watch className="w-5 h-5 text-orange-500" />
+        <div className="space-y-4 sm:space-y-6">
+          <div className="bg-[#101522] border border-neutral-800/90 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-2xl space-y-3 sm:space-y-4">
+            <h3 className="text-base sm:text-lg font-black text-white flex items-center gap-2">
+              <Watch className="w-5 h-5 text-orange-500 shrink-0" />
               <span>Quét thông số từ ảnh màn hình đồng hồ</span>
             </h3>
             <p className="text-xs text-neutral-400">
@@ -799,7 +801,7 @@ export default function RunCalculator() {
 
           {/* Loading state: Athletic Pace Sensor Waveform Scanner */}
           {photoLoading && (
-            <div className="bg-[#101522] border border-[#1e2638] rounded-3xl p-8 text-center space-y-5">
+            <div className="bg-[#101522] border border-[#1e2638] rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-center space-y-4 sm:space-y-5">
               {/* Athletic Waveform Scanner */}
               <div className="flex items-center justify-center gap-1.5 h-10">
                 <span className="w-1.5 bg-orange-500 rounded-full animate-wave-1" />
@@ -830,7 +832,7 @@ export default function RunCalculator() {
 
           {/* Error state */}
           {photoError && (
-            <div className="bg-red-500/10 border border-red-500/30 rounded-2xl p-4 flex items-start gap-3">
+            <div className="bg-red-500/10 border border-red-500/30 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 flex items-start gap-2.5 sm:gap-3">
               <AlertTriangle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
               <div className="space-y-1">
                 <h3 className="font-bold text-red-200 text-sm">
@@ -845,29 +847,29 @@ export default function RunCalculator() {
 
           {/* Form xác nhận & điều chỉnh số liệu AI đã đọc */}
           {(photoDistance || photoDuration || photoAiNote) && !photoLoading && (
-            <div className="bg-[#101522] border border-neutral-800/90 rounded-3xl p-6 sm:p-7 shadow-2xl space-y-4">
-              <div className="flex items-center justify-between">
+            <div className="bg-[#101522] border border-neutral-800/90 rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-2xl space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <h4 className="text-sm font-black text-white flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                   Số liệu AI trích xuất (có thể chỉnh sửa)
                 </h4>
                 {photoPace && (
-                  <span className="text-xs font-bold px-3 py-1 bg-orange-500/20 text-orange-400 border border-orange-500/30 rounded-xl font-mono">
+                  <span className="self-start sm:self-auto text-xs font-bold px-2.5 py-1 bg-orange-500/20 text-orange-400 border border-orange-500/30 rounded-lg sm:rounded-xl font-mono">
                     Pace: {photoPace}
                   </span>
                 )}
               </div>
 
               {photoAiNote && (
-                <p className="text-xs text-neutral-300 bg-[#141b2b] p-3.5 rounded-2xl border border-neutral-800">
+                <p className="text-xs text-neutral-300 bg-[#141b2b] p-3 sm:p-3.5 rounded-xl sm:rounded-2xl border border-neutral-800">
                   {photoAiNote}
                 </p>
               )}
 
               <form onSubmit={handleCalculateFromPhotoForm} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                   <div>
-                    <label className="block text-xs font-extrabold uppercase tracking-wider text-neutral-300 mb-1.5">
+                    <label className="block text-xs font-extrabold uppercase tracking-wider text-neutral-300 mb-1">
                       Quãng đường (km)
                     </label>
                     <input
@@ -877,12 +879,12 @@ export default function RunCalculator() {
                       required
                       value={photoDistance}
                       onChange={(e) => setPhotoDistance(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-neutral-800 bg-[#141b2b] text-white font-mono font-bold text-base focus:outline-none focus:border-orange-500"
+                      className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-neutral-800 bg-[#141b2b] text-white font-mono font-bold text-base focus:outline-none focus:border-orange-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-extrabold uppercase tracking-wider text-neutral-300 mb-1.5">
+                    <label className="block text-xs font-extrabold uppercase tracking-wider text-neutral-300 mb-1">
                       Thời gian (phút)
                     </label>
                     <input
@@ -892,12 +894,12 @@ export default function RunCalculator() {
                       required
                       value={photoDuration}
                       onChange={(e) => setPhotoDuration(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-neutral-800 bg-[#141b2b] text-white font-mono font-bold text-base focus:outline-none focus:border-orange-500"
+                      className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-neutral-800 bg-[#141b2b] text-white font-mono font-bold text-base focus:outline-none focus:border-orange-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-extrabold uppercase tracking-wider text-neutral-300 mb-1.5">
+                    <label className="block text-xs font-extrabold uppercase tracking-wider text-neutral-300 mb-1">
                       Cân nặng (kg)
                     </label>
                     <input
@@ -908,14 +910,14 @@ export default function RunCalculator() {
                       required
                       value={photoWeight}
                       onChange={(e) => setPhotoWeight(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-neutral-800 bg-[#141b2b] text-white font-mono font-bold text-base focus:outline-none focus:border-orange-500"
+                      className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-neutral-800 bg-[#141b2b] text-white font-mono font-bold text-base focus:outline-none focus:border-orange-500"
                     />
                   </div>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black text-sm hover:opacity-95 transition shadow-md cursor-pointer"
+                  className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black text-xs sm:text-sm hover:opacity-95 transition shadow-md cursor-pointer"
                 >
                   Tính lại với thông số trên
                 </button>

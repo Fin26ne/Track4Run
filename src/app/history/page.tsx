@@ -139,20 +139,20 @@ export default function HistoryPage() {
           />
 
           {/* Card thống kê tổng hợp tuần / tháng */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {/* Thống kê tuần */}
-            <div className="p-5 sm:p-6 rounded-3xl bg-[#101522] border border-[#1e2638] shadow-xl space-y-3.5">
+            <div className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#101522] border border-[#1e2638] shadow-xl space-y-3 sm:space-y-3.5">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-extrabold uppercase tracking-wider text-neutral-400">
+                <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-neutral-400">
                   7 ngày qua
                 </span>
-                <span className="text-xs font-bold px-2.5 py-1 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                <span className="text-xs font-bold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg sm:rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
                   {Math.round(weekKm * 10) / 10} km
                 </span>
               </div>
 
               {weeklyKmGoal && (
-                <div className="space-y-1.5">
+                <div className="space-y-1 sm:space-y-1.5">
                   <div className="flex justify-between text-xs text-neutral-400">
                     <span>Mục tiêu chạy tuần</span>
                     <span className="font-bold text-white">
@@ -180,18 +180,18 @@ export default function HistoryPage() {
             </div>
 
             {/* Thống kê tháng */}
-            <div className="p-5 sm:p-6 rounded-3xl bg-[#101522] border border-[#1e2638] shadow-xl space-y-3.5">
+            <div className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#101522] border border-[#1e2638] shadow-xl space-y-3 sm:space-y-3.5">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-extrabold uppercase tracking-wider text-neutral-400">
+                <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-neutral-400">
                   30 ngày qua
                 </span>
-                <span className="text-xs font-bold px-2.5 py-1 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-400">
+                <span className="text-xs font-bold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg sm:rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-400">
                   Net: {monthIntake - monthBurn > 0 ? `+${monthIntake - monthBurn}` : monthIntake - monthBurn} kcal
                 </span>
               </div>
 
               {monthlyDeficitGoal && (
-                <div className="space-y-1.5">
+                <div className="space-y-1 sm:space-y-1.5">
                   <div className="flex justify-between text-xs text-neutral-400">
                     <span>Mục tiêu thâm hụt tháng</span>
                     <span className="font-bold text-white">

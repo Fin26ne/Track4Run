@@ -31,6 +31,12 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+/* Safe area insets cho điện thoại (iPhone X/11/12/13/14/15/16 và Android gesture bar) */
+.safe-area-bottom {
+  padding-bottom: max(0.6rem, env(safe-area-inset-bottom, 0.6rem));
+}
+
+
 @keyframes fadeIn {
   from {
     opacity: 0;
