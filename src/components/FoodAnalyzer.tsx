@@ -179,10 +179,10 @@ export default function FoodAnalyzer() {
         <div>
           <h2 className="text-base sm:text-lg font-black text-white flex items-center gap-2">
             <Utensils className="w-5 h-5 text-emerald-500 shrink-0" />
-            Nhận diện calo bữa ăn
+            Nhận diện dinh dưỡng bữa ăn
           </h2>
           <p className="text-xs sm:text-sm text-neutral-400 mt-1">
-            Chụp đĩa cơm, tô phở hoặc đồ ăn vặt. Gemini Vision sẽ ước lượng gram và tính calo từng món.
+            Chụp ảnh bữa ăn của bạn để Gemini Vision hỗ trợ nhận diện thành phần và ước lượng calo một cách chi tiết, minh bạch.
           </p>
         </div>
 
@@ -199,7 +199,7 @@ export default function FoodAnalyzer() {
           <label className="text-xs font-bold text-neutral-300 flex items-center justify-between">
             <span className="flex items-center gap-1.5">
               <MessageSquareQuote className="w-4 h-4 text-emerald-400" />
-              Ghi chú thêm cho AI (kích thước đĩa, khẩu phần ăn, món không dùng...)
+              Ghi chú bổ sung cho AI (khẩu phần, kích thước, thành phần...)
             </span>
             <span className="text-[10px] text-neutral-500 font-semibold uppercase tracking-wider">
               Tùy chọn
@@ -216,7 +216,7 @@ export default function FoodAnalyzer() {
                   handleReanalyze();
                 }
               }}
-              placeholder="Ví dụ: Cái đĩa này tầm 15cm đấy, tôi chỉ ăn 1 nửa, không ăn nước dùng..."
+              placeholder="Nhập kích thước phần ăn, dụng cụ hoặc các thành phần bạn không dùng..."
               className="flex-1 px-3.5 py-2.5 rounded-xl bg-[#141b2b] border border-[#1e2638] focus:border-emerald-500 text-xs sm:text-sm text-white placeholder-neutral-500 outline-none transition shadow-inner"
             />
 
@@ -235,7 +235,7 @@ export default function FoodAnalyzer() {
           </div>
 
           <p className="text-[11px] text-neutral-400 leading-relaxed">
-            💡 <strong className="text-neutral-300">Mẹo tính chuẩn:</strong> Nếu thấy calo bị dư, hãy nhập kích thước đĩa (ví dụ: <em>&quot;đĩa 15cm&quot;</em>) hoặc phần bỏ lại (ví dụ: <em>&quot;ăn 1/2&quot;</em>, <em>&quot;bỏ nước béo&quot;</em>).
+            💡 Bạn có thể cung cấp thêm thông tin về khẩu phần thực tế hoặc các thành phần không dùng để hệ thống hỗ trợ ước lượng chính xác nhất cho bữa ăn của bạn.
           </p>
         </div>
       </div>
@@ -295,7 +295,7 @@ export default function FoodAnalyzer() {
               <Sparkles className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
               <div className="space-y-0.5 text-xs sm:text-sm">
                 <span className="font-extrabold text-emerald-300 block">
-                  AI đã áp dụng ghi chú của bạn:
+                  Đã ghi nhận và căn chỉnh theo thông tin của bạn:
                 </span>
                 <p className="text-emerald-100/90 leading-relaxed">
                   {result.appliedContextNote}
@@ -402,7 +402,7 @@ export default function FoodAnalyzer() {
               <Info className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 shrink-0 mt-0.5" />
               <div className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
                 <span className="font-bold text-white">
-                  Nhận xét của AI:{" "}
+                  Lời khuyên dinh dưỡng từ AI:{" "}
                 </span>
                 {result.note}
               </div>

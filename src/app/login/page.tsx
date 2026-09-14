@@ -33,9 +33,19 @@ export default function LoginPage() {
         router.push("/");
         router.refresh();
       } else {
+        const redirectUrl =
+          typeof window !== "undefined"
+            ? `${window.location.origin}/auth/callback`
+            : process.env.NEXT_PUBLIC_SITE_URL
+            ? `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`
+            : undefined;
+
         const { data, error } = await supabase.auth.signUp({
           email,
           password,
+          options: {
+            emailRedirectTo: redirectUrl,
+          },
         });
 
         if (error) throw error;
@@ -43,7 +53,7 @@ export default function LoginPage() {
         // Nếu Supabase yêu cầu xác thực email (chưa có session tức thì)
         if (data.user && !data.session) {
           setInfoMsg(
-            "Đăng ký thành công! Supabase đã gửi email xác nhận. Vui lòng kiểm tra hộp thư đến (hoặc thư rác) để bấm link kích hoạt tài khoản."
+            "Đăng ký thành công! Hệ thống đã gửi email xác nhận. Bạn vui lòng kiểm tra hộp thư đến (hoặc thư rác/spam) và nhấn vào liên kết kích hoạt để hoàn tất nhé."
           );
         } else {
           router.push("/");
@@ -51,7 +61,7 @@ export default function LoginPage() {
         }
       }
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "Đã có lỗi xảy ra.";
+      const msg = err instanceof Error ? err.message : "Đã có lỗi xảy ra. Bạn vui lòng thử lại sau ít phút.";
       setErrorMsg(msg);
     } finally {
       setLoading(false);
