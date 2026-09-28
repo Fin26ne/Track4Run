@@ -19,6 +19,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       className="flex flex-col h-full overflow-hidden border border-gray-200"
     >
       <div className="w-full overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={product.image}
           alt={product.name}
