@@ -6,26 +6,30 @@ import { cn } from "cn";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-gray-50 flex flex-col w-full overflow-x-hidden">
       {/* Header navigation */}
-      <header className="border-b border-gray-200 bg-white sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-bold text-gray-900">Lumière Candles</h1>
-            <p className="text-xs text-gray-500">Handcrafted botanical scented candles</p>
+      <header className="border-b border-gray-200 bg-white sticky top-0 z-10 w-full">
+        <div className="max-w-6xl mx-auto px-4 py-3 sm:py-4 flex items-center justify-between gap-2">
+          <div className="min-w-0">
+            <h1 className="text-lg sm:text-xl font-bold text-gray-900 truncate">
+              Lumière Candles
+            </h1>
+            <p className="hidden sm:block text-xs text-gray-500">
+              Handcrafted botanical scented candles
+            </p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <Link
               href="/login"
               data-testid="btn-login"
-              className={cn(buttonVariants({ variant: "outline" }), "cursor-pointer")}
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }), "sm:h-8 cursor-pointer")}
             >
               Login
             </Link>
             <Link
               href="/register"
               data-testid="btn-register"
-              className={cn(buttonVariants({ variant: "default" }), "cursor-pointer")}
+              className={cn(buttonVariants({ variant: "default", size: "sm" }), "sm:h-8 cursor-pointer")}
             >
               Register
             </Link>
