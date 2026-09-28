@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Card,
   CardHeader,
@@ -15,6 +16,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export default function RegisterPage() {
+  const router = useRouter();
+
   // form input state
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -83,6 +86,26 @@ export default function RegisterPage() {
       setPasswordError("");
       setConfirmPasswordError("");
       setSuccessMessage("Registration successful (demo)");
+
+      // save new user to localStorage
+      if (typeof window !== "undefined") {
+        try {
+          const users = JSON.parse(localStorage.getItem("users") || "[]");
+          users.push({ name: name.trim(), email: email.trim(), password });
+          localStorage.setItem("users", JSON.stringify(users));
+          localStorage.setItem(
+            "currentUser",
+            JSON.stringify({ name: name.trim(), email: email.trim() })
+          );
+        } catch {
+          // ignore storage error
+        }
+      }
+
+      // redirect to login after short delay
+      setTimeout(() => {
+        router.push("/login");
+      }, 800);
     } else {
       setSuccessMessage("");
     }

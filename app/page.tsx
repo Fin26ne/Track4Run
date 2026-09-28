@@ -1,10 +1,49 @@
+"use client";
+
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { products } from "@/data/products";
 import ProductCard from "@/components/ProductCard";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "cn";
 
+function subscribe(callback: () => void) {
+  window.addEventListener("storage", callback);
+  return () => window.removeEventListener("storage", callback);
+}
+
+function getSnapshot(): string | null {
+  try {
+    return localStorage.getItem("currentUser");
+  } catch {
+    return null;
+  }
+}
+
+function getServerSnapshot(): string | null {
+  return null;
+}
+
 export default function HomePage() {
+  const storedUser = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  let currentUser: { name: string; email: string } | null = null;
+  if (storedUser) {
+    try {
+      currentUser = JSON.parse(storedUser);
+    } catch {
+      currentUser = null;
+    }
+  }
+
+  function handleLogout() {
+    try {
+      localStorage.removeItem("currentUser");
+      window.dispatchEvent(new Event("storage"));
+    } catch {
+      // ignore
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col w-full overflow-x-hidden">
       {/* Header navigation */}
@@ -19,6 +58,23 @@ export default function HomePage() {
             </p>
           </div>
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {currentUser && (
+              <div className="flex items-center gap-2">
+                <span className="text-xs sm:text-sm font-medium text-gray-700 bg-gray-100 px-2 py-1 rounded">
+                  Hi, {currentUser.name}
+                </span>
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "sm" }),
+                    "sm:h-8 text-xs cursor-pointer text-gray-600 hover:text-red-600"
+                  )}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
             <Link
               href="/login"
               data-testid="btn-login"

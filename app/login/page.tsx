@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Card,
   CardHeader,
@@ -15,6 +16,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export default function LoginPage() {
+  const router = useRouter();
+
   // form input state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -55,6 +58,23 @@ export default function LoginPage() {
       setEmailError("");
       setPasswordError("");
       setSuccessMessage("Login successful (demo)");
+
+      // save logged-in user in localStorage
+      if (typeof window !== "undefined") {
+        try {
+          const users = JSON.parse(localStorage.getItem("users") || "[]");
+          const existing = users.find((u: { email: string; name?: string }) => u.email.toLowerCase() === email.toLowerCase());
+          const displayName = existing?.name || email.split("@")[0];
+          localStorage.setItem("currentUser", JSON.stringify({ name: displayName, email }));
+        } catch {
+          // ignore storage error
+        }
+      }
+
+      // redirect to home
+      setTimeout(() => {
+        router.push("/");
+      }, 800);
     } else {
       setSuccessMessage("");
     }
