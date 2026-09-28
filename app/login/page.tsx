@@ -93,7 +93,13 @@ export default function LoginPage() {
                 type="email"
                 data-testid="login-email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setEmail(val);
+                  if (emailError && val.trim() && /\S+@\S+\.\S+/.test(val)) {
+                    setEmailError("");
+                  }
+                }}
                 placeholder="you@example.com"
               />
               {emailError && (
@@ -110,7 +116,13 @@ export default function LoginPage() {
                 type="password"
                 data-testid="login-password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setPassword(val);
+                  if (passwordError && val) {
+                    setPasswordError("");
+                  }
+                }}
                 placeholder="••••••••"
               />
               {passwordError && (
