@@ -1,12 +1,9 @@
-# Agent Workspace Rules
+<!-- BEGIN:nextjs-agent-rules -->
 
-## 1. QUY TẮC BẤT DI BẤT DỊCH: KHÔNG BAO GIỜ TỰ Ý COMMIT
-- **TUYỆT ĐỐI KHÔNG BAO GIỜ** tự ý chạy `git commit` hoặc `git push` trong bất kỳ hoàn cảnh nào.
-- Toàn bộ quyền kiểm soát git do **USER quyết định**. Agent KHÔNG ĐƯỢC PHÉP tự ý commit code lên repository.
-- Sau khi hoàn thành tác vụ, Agent chỉ trình bày thay đổi và gợi ý câu lệnh commit để User tự chạy nếu muốn.
+# This is NOT the Next.js you know
 
-## 2. QUY TẮC ĐỊNH DẠNG COMMIT MESSAGE (BẮT BUỘC 3 KIỂU)
-Khi đề xuất hoặc chuẩn bị commit, Agent CHỈ được sử dụng đúng 3 tiền tố sau, phân tách bằng dấu gạch chéo `/`:
-1. `feat/<tên-commit>`: Dành cho tính năng mới. (Ví dụ: `feat/ai-coach-advice`, `feat/athletic-waveform-animation`)
-2. `fix/<tên-commit>`: Dành cho sửa lỗi, vá bug. (Ví dụ: `fix/loading-spinner`, `fix/login-warning`)
-3. `migration/<tên-commit>`: Dành cho thay đổi database schema, di chuyển dữ liệu. (Ví dụ: `migration/add-goal-types`)
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
