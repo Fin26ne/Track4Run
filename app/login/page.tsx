@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 import {
   Card,
   CardHeader,
@@ -17,6 +18,7 @@ import { Button } from "@/components/ui/button";
 
 export default function LoginPage() {
   const router = useRouter();
+  const { signIn } = useAuth();
 
   // form input state
   const [email, setEmail] = useState("");
@@ -25,11 +27,9 @@ export default function LoginPage() {
   // error state
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [authError, setAuthError] = useState("");
 
-  // success message state
-  const [successMessage, setSuccessMessage] = useState("");
-
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     let hasError = false;
@@ -53,30 +53,18 @@ export default function LoginPage() {
       setPasswordError("");
     }
 
-    // if all valid, show success and clear errors
+    // if all valid, call signIn from AuthContext
     if (!hasError) {
       setEmailError("");
       setPasswordError("");
-      setSuccessMessage("Login successful (demo)");
+      setAuthError("");
 
-      // save logged-in user in localStorage
-      if (typeof window !== "undefined") {
-        try {
-          const users = JSON.parse(localStorage.getItem("users") || "[]");
-          const existing = users.find((u: { email: string; name?: string }) => u.email.toLowerCase() === email.toLowerCase());
-          const displayName = existing?.name || email.split("@")[0];
-          localStorage.setItem("currentUser", JSON.stringify({ name: displayName, email }));
-        } catch {
-          // ignore storage error
-        }
+      const { error } = await signIn(email, password);
+      if (error) {
+        setAuthError(error.message);
+      } else {
+        router.replace("/");
       }
-
-      // redirect to home
-      setTimeout(() => {
-        router.push("/");
-      }, 800);
-    } else {
-      setSuccessMessage("");
     }
   }
 
@@ -91,12 +79,12 @@ export default function LoginPage() {
         </CardHeader>
 
         <CardContent>
-          {successMessage && (
+          {authError && (
             <div
-              data-testid="form-success"
-              className="mb-4 rounded-md bg-green-50 p-3 text-sm text-green-700 border border-green-200"
+              data-testid="error-auth"
+              className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-700 border border-red-200"
             >
-              {successMessage}
+              {authError}
             </div>
           )}
 

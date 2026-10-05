@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 import {
   Card,
   CardHeader,
@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export default function RegisterPage() {
-  const router = useRouter();
+  const { signUp } = useAuth();
 
   // form input state
   const [name, setName] = useState("");
@@ -29,11 +29,12 @@ export default function RegisterPage() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [authError, setAuthError] = useState("");
 
   // success message state
   const [successMessage, setSuccessMessage] = useState("");
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     let hasError = false;
@@ -79,33 +80,21 @@ export default function RegisterPage() {
       setConfirmPasswordError("");
     }
 
-    // if all valid, show success and clear errors
+    // if all valid, call signUp from AuthContext
     if (!hasError) {
       setNameError("");
       setEmailError("");
       setPasswordError("");
       setConfirmPasswordError("");
-      setSuccessMessage("Registration successful (demo)");
+      setAuthError("");
+      setSuccessMessage("");
 
-      // save new user to localStorage
-      if (typeof window !== "undefined") {
-        try {
-          const users = JSON.parse(localStorage.getItem("users") || "[]");
-          users.push({ name: name.trim(), email: email.trim(), password });
-          localStorage.setItem("users", JSON.stringify(users));
-          localStorage.setItem(
-            "currentUser",
-            JSON.stringify({ name: name.trim(), email: email.trim() })
-          );
-        } catch {
-          // ignore storage error
-        }
+      const { error } = await signUp(email, password);
+      if (error) {
+        setAuthError(error.message);
+      } else {
+        setSuccessMessage("Registration successful");
       }
-
-      // redirect to login after short delay
-      setTimeout(() => {
-        router.push("/login");
-      }, 800);
     } else {
       setSuccessMessage("");
     }
@@ -124,6 +113,15 @@ export default function RegisterPage() {
         </CardHeader>
 
         <CardContent>
+          {authError && (
+            <div
+              data-testid="error-auth"
+              className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-700 border border-red-200"
+            >
+              {authError}
+            </div>
+          )}
+
           {successMessage && (
             <div
               data-testid="form-success"
