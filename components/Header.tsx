@@ -1,12 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import { Heart } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export default function Header() {
   const { user, signOut } = useAuth();
+  const { favorites } = useFavorites();
 
   return (
     <header className="border-b border-gray-200 bg-white sticky top-0 z-10 w-full">
@@ -24,6 +27,20 @@ export default function Header() {
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {user ? (
             <div className="flex items-center gap-2 sm:gap-3">
+              <Link
+                href="/favorites"
+                data-testid="link-favorites"
+                className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-gray-700 hover:text-gray-900 px-2 py-1 rounded hover:bg-gray-100 transition-colors"
+              >
+                <Heart className="size-4 text-red-500 fill-red-500" />
+                <span className="hidden sm:inline">Favorites</span>
+                <span
+                  data-testid="favorites-count"
+                  className="bg-gray-100 text-gray-800 text-xs px-2 py-0.5 rounded-full font-semibold border border-gray-200"
+                >
+                  {favorites.length}
+                </span>
+              </Link>
               <Link href="/account" className="hover:underline">
                 <span
                   data-testid="user-email"

@@ -2,7 +2,38 @@ import Header from "@/components/Header";
 import { products } from "@/data/products";
 import ProductCard from "@/components/ProductCard";
 
-export default function HomePage() {
+type PageProps = {
+  searchParams: Promise<{ q?: string; category?: string }>;
+};
+
+export default async function HomePage({ searchParams }: PageProps) {
+  const params = (await searchParams) || {};
+  const q = params.q || "";
+  const category = params.category || "";
+
+  const query = q.trim().toLowerCase();
+  const cat = category.trim().toLowerCase();
+
+  let filteredProducts = products;
+
+  if (query) {
+    filteredProducts = filteredProducts.filter(
+      (p) =>
+        p.name.toLowerCase().includes(query) ||
+        p.description.toLowerCase().includes(query)
+    );
+  }
+
+  if (cat) {
+    filteredProducts = filteredProducts.filter(
+      (p) => p.category.toLowerCase() === cat
+    );
+  }
+
+  // Get distinct categories for dropdown
+  const categories = Array.from(new Set(products.map((p) => p.category)));
+  const selectedCategory = categories.find((c) => c.toLowerCase() === cat) || "";
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col w-full overflow-x-hidden">
       {/* Header navigation */}
@@ -17,15 +48,66 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* Product grid container */}
-        <div
-          data-testid="product-list"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        {/* Search and Filter Form */}
+        <form
+          method="get"
+          action="/"
+          className="mb-8 flex flex-col sm:flex-row gap-3 bg-white p-4 rounded-lg border border-gray-200 shadow-xs"
         >
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+          <div className="flex-1">
+            <input
+              type="text"
+              name="q"
+              defaultValue={q}
+              data-testid="search-input"
+              placeholder="Search candles by name or description..."
+              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
+            />
+          </div>
+
+          <div className="w-full sm:w-48">
+            <select
+              name="category"
+              defaultValue={selectedCategory}
+              data-testid="category-select"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 bg-white"
+            >
+              <option value="">All</option>
+              {categories.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <button
+            type="submit"
+            data-testid="btn-search"
+            className="px-4 py-2 bg-gray-900 text-white rounded-md text-sm font-medium hover:bg-gray-800 transition-colors cursor-pointer"
+          >
+            Search
+          </button>
+        </form>
+
+        {/* Product Catalog or No Results */}
+        {filteredProducts.length === 0 ? (
+          <div
+            data-testid="no-results"
+            className="text-center py-12 bg-white rounded-lg border border-gray-200"
+          >
+            <p className="text-gray-500 text-sm">No products found matching your search.</p>
+          </div>
+        ) : (
+          <div
+            data-testid="product-list"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {filteredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
       </main>
 
       {/* Footer */}
