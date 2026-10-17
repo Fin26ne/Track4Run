@@ -5,6 +5,8 @@ import { products } from "@/data/products";
 import Header from "@/components/Header";
 import FavoriteButton from "@/components/FavoriteButton";
 
+export const dynamicParams = false;
+
 type Props = {
   params: Promise<{ id: string }>;
 };
@@ -18,12 +20,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const productId = Number(id);
-  const product = products.find((p) => p.id === productId);
 
+  if (isNaN(productId) || !Number.isInteger(productId)) {
+    notFound();
+  }
+
+  const product = products.find((p) => p.id === productId);
   if (!product) {
-    return {
-      title: "Product Not Found | Lumière Candles",
-    };
+    notFound();
   }
 
   return {
