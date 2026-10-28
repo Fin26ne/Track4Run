@@ -2,8 +2,11 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { products } from "@/data/products";
+import { getProductReviews } from "@/lib/reviews";
 import Header from "@/components/Header";
 import FavoriteButton from "@/components/FavoriteButton";
+import { ReviewsProvider } from "@/contexts/ReviewsContext";
+import ReviewsSection from "@/components/ReviewsSection";
 
 export const dynamicParams = false;
 
@@ -48,6 +51,8 @@ export default async function ProductDetailPage({ params }: Props) {
   if (!product) {
     notFound();
   }
+
+  const { reviews } = await getProductReviews(productId);
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -111,6 +116,14 @@ export default async function ProductDetailPage({ params }: Props) {
             </div>
           </div>
         </div>
+
+        {/* Reviews Section */}
+        <ReviewsProvider productId={product.id} initialReviews={reviews}>
+          <ReviewsSection
+            productId={product.id}
+            initialReviews={reviews}
+          />
+        </ReviewsProvider>
       </main>
     </div>
   );
