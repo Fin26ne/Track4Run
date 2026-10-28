@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { useRouter } from "next/navigation";
+import { createClient } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuth } from "@/contexts/AuthContext";
 import type { Review } from "@/lib/reviews";
@@ -23,11 +24,16 @@ function reviewsReducer(state: Review[], action: Action): Review[] {
     case "SET":
       return action.payload;
     case "ADD":
-      return [action.payload, ...state.filter((r) => r.id !== action.payload.id)];
+      return [
+        action.payload,
+        ...state.filter((r) => String(r.id) !== String(action.payload.id)),
+      ];
     case "UPDATE":
-      return state.map((r) => (r.id === action.payload.id ? action.payload : r));
+      return state.map((r) =>
+        String(r.id) === String(action.payload.id) ? action.payload : r
+      );
     case "REMOVE":
-      return state.filter((r) => r.id !== action.payload);
+      return state.filter((r) => String(r.id) !== String(action.payload));
     default:
       return state;
   }
@@ -111,7 +117,24 @@ export function ReviewsProvider({
       throw new Error("No review to update");
     }
 
-    const { data, error } = await supabase
+    const { data: sessionData } = await supabase.auth.getSession();
+    const token = sessionData.session?.access_token;
+
+    const client = token
+      ? createClient(
+          process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder.supabase.co",
+          process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder-anon-key",
+          {
+            global: {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          }
+        )
+      : supabase;
+
+    const { data, error } = await client
       .from("reviews")
       .update({ rating, comment })
       .eq("id", targetId)
@@ -135,16 +158,34 @@ export function ReviewsProvider({
   };
 
   const deleteReview = async (reviewId?: number | string): Promise<void> => {
-    const target = reviewId
-      ? reviews.find((r) => r.id === reviewId)
-      : myReview;
+    const target =
+      reviewId != null
+        ? reviews.find((r) => String(r.id) === String(reviewId))
+        : myReview;
 
     if (!target) return;
 
     // Optimistically remove
     dispatch({ type: "REMOVE", payload: target.id });
 
-    const { error } = await supabase
+    const { data: sessionData } = await supabase.auth.getSession();
+    const token = sessionData.session?.access_token;
+
+    const client = token
+      ? createClient(
+          process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder.supabase.co",
+          process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder-anon-key",
+          {
+            global: {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          }
+        )
+      : supabase;
+
+    const { error } = await client
       .from("reviews")
       .delete()
       .eq("id", target.id);

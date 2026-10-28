@@ -54,7 +54,8 @@ export default function ReviewsSection({ productId }: ReviewsSectionProps) {
       );
     }
 
-    if (myReview && !justSubmitted) {
+    // Logged in with a review: no new-review form!
+    if (myReview) {
       return null;
     }
 
@@ -96,7 +97,24 @@ export default function ReviewsSection({ productId }: ReviewsSectionProps) {
         </div>
       </div>
 
-      {/* Review Form Area (Conditional) */}
+      {/* Success Notification after Submitting */}
+      {justSubmitted && (
+        <div
+          data-testid="review-success"
+          className="rounded-md bg-green-50 p-4 text-sm text-green-700 border border-green-200 my-4 flex items-center justify-between"
+        >
+          <span>Review submitted successfully!</span>
+          <button
+            type="button"
+            onClick={() => setJustSubmitted(false)}
+            className="text-xs text-green-800 hover:underline font-semibold cursor-pointer"
+          >
+            &times; Close
+          </button>
+        </div>
+      )}
+
+      {/* Review Form Area (Conditional: only when logged in with no review) */}
       {renderFormArea()}
 
       {/* Reviews List */}
@@ -110,8 +128,12 @@ export default function ReviewsSection({ productId }: ReviewsSectionProps) {
           </div>
         ) : (
           reviews.map((review) => {
-            const isOwn =
-              Boolean(user && user.id && review.user_id && user.id === review.user_id);
+            const isOwn = Boolean(
+              user &&
+                user.id &&
+                review.user_id &&
+                String(user.id) === String(review.user_id)
+            );
 
             return (
               <div
