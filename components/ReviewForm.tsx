@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { reviewSchema, type ReviewInput } from "@/lib/reviewSchema";
@@ -37,6 +37,16 @@ export default function ReviewForm({
       comment: initialData?.comment ?? "",
     },
   });
+
+  useEffect(() => {
+    if (initialData) {
+      reset({
+        product_id: productId,
+        rating: initialData.rating,
+        comment: initialData.comment,
+      });
+    }
+  }, [initialData, productId, reset]);
 
   const onSubmit = async (data: ReviewInput) => {
     setServerError("");

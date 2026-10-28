@@ -4,7 +4,6 @@ import {
   createContext,
   useContext,
   useReducer,
-  useEffect,
   type ReactNode,
 } from "react";
 import { useRouter } from "next/navigation";
@@ -68,13 +67,9 @@ export function ReviewsProvider({
   const { user } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    dispatch({ type: "SET", payload: initialReviews });
-  }, [initialReviews]);
-
   const myReview =
     user && user.id
-      ? reviews.find((r) => r.user_id === user.id) || null
+      ? reviews.find((r) => String(r.user_id) === String(user.id)) || null
       : null;
 
   const submitReview = async (rating: number, comment: string): Promise<Review> => {
@@ -138,22 +133,18 @@ export function ReviewsProvider({
       .from("reviews")
       .update({ rating, comment })
       .eq("id", targetId)
-      .select()
-      .single();
+      .select();
 
     if (error) {
       throw new Error(error.message || "Failed to update review");
     }
 
-    const updatedReview: Review = data || {
-      ...myReview!,
-      id: targetId,
-      rating,
-      comment,
-    };
+    if (!data || data.length === 0) {
+      throw new Error("Review not found or could not be updated");
+    }
 
+    const updatedReview: Review = data[0];
     dispatch({ type: "UPDATE", payload: updatedReview });
-    router.refresh();
     return updatedReview;
   };
 
@@ -165,9 +156,10 @@ export function ReviewsProvider({
 
     if (!target) return;
 
-    // Optimistically remove
+    // Optimistically remove from UI
     dispatch({ type: "REMOVE", payload: target.id });
 
+    // Get active user token for RLS
     const { data: sessionData } = await supabase.auth.getSession();
     const token = sessionData.session?.access_token;
 
@@ -191,12 +183,10 @@ export function ReviewsProvider({
       .eq("id", target.id);
 
     if (error) {
-      // Rollback
+      // Rollback optimistic delete if database returned error
       dispatch({ type: "ADD", payload: target });
       throw new Error(error.message || "Failed to delete review");
     }
-
-    router.refresh();
   };
 
   return (
